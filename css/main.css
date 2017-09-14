@@ -1,0 +1,36 @@
+ul {
+	list-style-type: none;
+}
+
+.mid_wrapper {
+	margin-top: 20px;
+}
+
+#slide_menu> ul > li {
+	color:black;
+	padding-top: 0px;
+	width: 550px;
+}
+
+#slide_menu > ul > li > p{
+	font-size: 20px;
+	background: lightgray;
+}
+
+#slide_menu> ul > li > ul {
+	margin-left: -20px;
+}
+
+#slide_menu> ul > li > ul > li{
+	color:black;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	padding: 0;
+	width: 310px;
+}
+
+#slide_menu> ul > li > ul > li > p{
+	font-size: 16px;
+	background: lightgray;
+	margin: 10px;
+}
