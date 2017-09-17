@@ -4,8 +4,10 @@
 	<meta charset="UTF-8">
 	<title>CGA</title>
 	<link rel="stylesheet" href="css/lib/bootstrap.min.css">
+	<link rel="stylesheet" href="css/lib/default.css">
 	<link rel="stylesheet" href="css/main.css">
 	<script src="js/lib/jquery-3.2.1.min.js"></script>
+	<script src="js/lib/highlight.pack.js"></script>
 </head>
 <body>
 	<div class="row justify-content-center top_wrapper">
@@ -17,12 +19,12 @@
 	    </div>
 	</div>
   	<div class="row justify-content-center mid_wrapper">
-	    <div class="col-4 col-sm-4" id="nav_wrapper">
+	    <div class="col-2 col-sm-4" id="nav_wrapper">
 			<nav id="slide_menu">
 				<ul>
 					<li>
 						<p>Worksheet 1: Getting started with WebG</p>
-						<ul class="left_nav">
+						<ul id="left_nav">
 							<li><p>part 1: Setup a basic WebGL application</p></li>
 							<li><p>part 2: Shaders and buffers</p></li>
 							<li><p>part 3: Triangles</p></li>
@@ -33,7 +35,7 @@
 
 					<li>
 						<p>Worksheet 2: Getting started with WebGL</p>
-						<ul class="left_nav">
+						<ul id="left_nav">
 							<li><p>part 1: </p></li>
 							<li><p>part 2: </p></li>
 							<li><p>part 3: </p></li>
@@ -44,7 +46,7 @@
 
 					<li>
 						<p>Worksheet 3: Projections (virtual camera) and transformations</p>
-						<ul class="left_nav">
+						<ul id="left_nav">
 							<li><p>part 1: </p></li>
 							<li><p>part 2: </p></li>
 							<li><p>part 3: </p></li>
@@ -55,18 +57,22 @@
 				</ul>
 			</nav>
 	    </div>
-	    <div class="col-8 col-sm-5">
+	    <div class="col-10 col-sm-6">
 		    <div class="col">
-		      	vertex shader
+		      	<p>vertex shader</p>
+		      	<pre><code id="vertex_shader" class="html"></code></pre>
 		    </div>
 		    <div class="col">
-		      	fragment shader
+		      	<p>fragment shader</p>
+		      	<pre><code id="fragment_shader" class="html"></code></pre>
 		    </div>
 		    <div class="col">
-		      	html
+		      	<p>html</p>
+		      	<pre><code id="html_code" class="html"></code></pre>
 		    </div>
 		    <div class="col">
-		      	js
+		      	<p>js</p>
+		      	<pre><code id="js_code" class="javascript"></code></pre>
 		    </div>
 	    </div>
     </div>
