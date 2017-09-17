@@ -5,11 +5,21 @@ hr {
 
 }
 
+
 .mid_wrapper {
 	margin-top: 20px;
 }
 
-#slide_menu> ul > li {
+#nav_wrapper {
+	position: relative;
+}
+
+#nav_wrapper > h2 {
+	text-align: center;
+}
+
+
+#slide_menu > ul > li {
 	color:black;
 	padding-top: 0px;
 	width: 550px;
@@ -20,11 +30,11 @@ hr {
 	background: lightgray;
 }
 
-#slide_menu> ul > li > ul {
+#slide_menu > ul > li > ul {
 	margin-left: -20px;
 }
 
-#slide_menu> ul > li > ul > li{
+#slide_menu > ul > li > ul > li{
 	color:black;
 	padding-top: 0px;
 	padding-bottom: 0px;
@@ -32,8 +42,24 @@ hr {
 	width: 310px;
 }
 
-#slide_menu> ul > li > ul > li > p{
+#slide_menu > ul > li > ul > li > p{
 	font-size: 16px;
 	background: lightgray;
 	margin: 10px;
+}
+
+#view_wrapper > div > p {
+	font-size: 30px;
+	text-align: center;
+
+}
+
+#gl_canvas {
+	margin-left: 0px;
+}
+
+@media screen and (min-width: 1500px) {
+    #gl_canvas {
+        margin-left: 190px;
+    }
 }

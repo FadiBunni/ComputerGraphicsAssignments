@@ -8,6 +8,9 @@
 	<link rel="stylesheet" href="css/main.css">
 	<script src="js/lib/jquery-3.2.1.min.js"></script>
 	<script src="js/lib/highlight.pack.js"></script>
+	<script type="text/javascript" src="js/lib/GraphicsEngine/webgl-utils.js"></script>
+	<script type="text/javascript" src="js/lib/GraphicsEngine/initShaders.js"></script>
+	<script type="text/javascript" src="js/lib/GraphicsEngine/MV.js"></script>
 </head>
 <body>
 	<div class="row justify-content-center top_wrapper">
@@ -15,64 +18,70 @@
 	      <h1>Welcome to course: Computer graphics - 02561</h1>
 	      <p>Below you can see all the assignments and its sub part, just choose one on the navigation bar.</p>
 	      <p>Optionally you can look at the files and see how each assignment is solves, but this application is ment to make it easier <br> for you.</p>
+	      <p>In the Javascript code the "window.onload" is executed in misc.js file, so we dont need to add it multiple times</p>
 	      	<hr></hr>
 	    </div>
 	</div>
   	<div class="row justify-content-center mid_wrapper">
 	    <div class="col-2 col-sm-4" id="nav_wrapper">
-			<nav id="slide_menu">
+	    	<h2>Pick a worksheet and a part</h2>
+			<nav id="slide_menu" data-spy="affix">
 				<ul>
 					<li>
 						<p>Worksheet 1: Getting started with WebG</p>
 						<ul id="left_nav">
-							<li><p>part 1: Setup a basic WebGL application</p></li>
-							<li><p>part 2: Shaders and buffers</p></li>
-							<li><p>part 3: Triangles</p></li>
-							<li><p>part 4: A rotating square</p></li>
-							<li><p>part 5: A fan of triangles</p></li>
+							<li><p>Part 1: Setup a basic WebGL application</p></li>
+							<li><p>Part 2: Shaders and buffers</p></li>
+							<li><p>Part 3: Triangles</p></li>
+							<li><p>Part 4: A rotating square</p></li>
+							<li><p>Part 5: A fan of triangles</p></li>
 						</ul>
 					</li>
 
 					<li>
 						<p>Worksheet 2: Getting started with WebGL</p>
 						<ul id="left_nav">
-							<li><p>part 1: </p></li>
-							<li><p>part 2: </p></li>
-							<li><p>part 3: </p></li>
-							<li><p>part 4: </p></li>
-							<li><p>part 5: </p></li>
+							<li><p>Part 1: </p></li>
+							<li><p>Part 2: </p></li>
+							<li><p>Part 3: </p></li>
+							<li><p>Part 4: </p></li>
+							<li><p>Part 5: </p></li>
 						</ul>
 					</li>
 
 					<li>
 						<p>Worksheet 3: Projections (virtual camera) and transformations</p>
 						<ul id="left_nav">
-							<li><p>part 1: </p></li>
-							<li><p>part 2: </p></li>
-							<li><p>part 3: </p></li>
-							<li><p>part 4: </p></li>
-							<li><p>part 5: </p></li>
+							<li><p>Part 1: </p></li>
+							<li><p>Part 2: </p></li>
+							<li><p>Part 3: </p></li>
+							<li><p>Part 4: </p></li>
+							<li><p>Part 5: </p></li>
 						</ul>
 					</li>
 				</ul>
 			</nav>
 	    </div>
-	    <div class="col-10 col-sm-6">
+	    <div class="col-10 col-sm-6" id="view_wrapper">
 		    <div class="col">
-		      	<p>vertex shader</p>
-		      	<pre><code id="vertex_shader" class="html"></code></pre>
+		      	<p>Vertex shader</p>
+		      	<pre><code id="vertex_shader" class="glsl"></code></pre>
 		    </div>
 		    <div class="col">
-		      	<p>fragment shader</p>
-		      	<pre><code id="fragment_shader" class="html"></code></pre>
+		      	<p>Fragment shader</p>
+		      	<pre><code id="fragment_shader" class="glsl"></code></pre>
 		    </div>
 		    <div class="col">
-		      	<p>html</p>
+		      	<p>Html-code</p>
 		      	<pre><code id="html_code" class="html"></code></pre>
 		    </div>
 		    <div class="col">
-		      	<p>js</p>
+		      	<p>Js-code</p>
 		      	<pre><code id="js_code" class="javascript"></code></pre>
+		    </div>
+		    <div class="col">
+		      	<p>Canvas</p>
+		      	<canvas id="gl_canvas"></canvas>
 		    </div>
 	    </div>
     </div>
