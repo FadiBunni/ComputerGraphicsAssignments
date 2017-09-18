@@ -83,6 +83,7 @@ function readAndPrintFileContent(CategoryTexts){
 		url: 'Assignments/' + categoryText + '/' + subCategoryText + '/js/sketch.js',
 		error: function(xhr, statusText) {
 		 	$("#js_code").text("ERROR: NO CODE!");
+		 	$("#js_canvas").remove("#js_canvas");
 		},
 		success: function(msg){
 			//highlightthe javascript code
@@ -91,9 +92,11 @@ function readAndPrintFileContent(CategoryTexts){
 	            hljs.highlightBlock(e)
 	        });
 		    //create the script that manipulates the canvas.
+		    $("#js_canvas").remove(script);
 	        var script = document.createElement('script');
 			script.type = 'text/javascript';
 			script.innerHTML = msg;
+			script.id = 'js_canvas'
 			$("body").append(script);
 		}
 	});
