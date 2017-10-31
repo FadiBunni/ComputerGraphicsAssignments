@@ -2,19 +2,18 @@ $(function () {
 	var categoryText;
 	var subCategoryText;
 
-	$("#slide_menu ul li ul").hide();
+	$("#nav_wrapper nav ul li ul").hide();
 
 	//slider nav
-	$("#slide_menu > ul > li").click(function(){
+	$("#nav_wrapper > nav > ul > li").click(function(){
 		if(!$(this).find('ul').is(":visible")) {
-			$("#slide_menu ul ul").slideUp();
+			$("#nav_wrapper ul ul").slideUp();
      		$(this).find('ul').slideDown();
   		}
-
 	});
 
 	//return text of Worksheet
-	$("#slide_menu > ul > li > p").on("click", function(){
+	$("#nav_wrapper > nav > ul > li > p").on("click", function(){
 		categoryText = $(this).text();
 	});
 
@@ -23,6 +22,7 @@ $(function () {
 		subCategoryText = $(this).text();
 		readAndPrintFileContent(categoryAndSubcategoryText(categoryText,subCategoryText));
 	});
+
 });
 
 function categoryAndSubcategoryText(categoryText, subCategoryText){
@@ -36,6 +36,7 @@ function readAndPrintFileContent(CategoryTexts){
 	var subCategoryText = CategoryTexts[1];
 	console.log('Assignments/' + categoryText + '/' + subCategoryText + '/js/shaders/vshader21.glsl');
 
+	//Get vertex shader text
 	$.ajax({
 		type: 'GET',
 		url: 'Assignments/' + categoryText + '/' + subCategoryText + '/js/shaders/vshader21.glsl',
@@ -46,10 +47,15 @@ function readAndPrintFileContent(CategoryTexts){
 		 	$("#vertex_shader").text(msg);
 		    $('#vertex_shader').each(function(i, e) {
 	            hljs.highlightBlock(e)
+
+	            //TODO - Add line numbers!
 	        });
+
+	        //TODO -- Load vertex shader
 		}
 	});
 
+	//Get fragment shader text
 	$.ajax({
 		type: 'GET',
 		url: 'Assignments/' + categoryText + '/' + subCategoryText + '/js/shaders/fshader21.glsl',
@@ -61,9 +67,12 @@ function readAndPrintFileContent(CategoryTexts){
 		    $('#fragment_shader').each(function(i, e) {
 	            hljs.highlightBlock(e)
 	        });
+
+	         //TODO -- Load fragment shader
 		}
 	});
 
+	//Get index.html text
 	$.ajax({
 		type: 'GET',
 		url: 'Assignments/' + categoryText + '/' + subCategoryText + '/index.html',
@@ -78,6 +87,7 @@ function readAndPrintFileContent(CategoryTexts){
 		}
 	});
 
+	//Get sketch.js text
 	$.ajax({
 		type: 'GET',
 		url: 'Assignments/' + categoryText + '/' + subCategoryText + '/js/sketch.js',
@@ -86,13 +96,21 @@ function readAndPrintFileContent(CategoryTexts){
 		 	$("#js_canvas").remove("#js_canvas");
 		},
 		success: function(msg){
-			//highlightthe javascript code
+			//highlight the javascript code
 		 	$("#js_code").text(msg);
 		    $('#js_code').each(function(i, e) {
 	            hljs.highlightBlock(e)
 	        });
-		    //create the script that manipulates the canvas.
+		    //first remove the sketch.js script nad canvas, if they exists
 		    $("#js_canvas").remove(script);
+		    $("#gl_canvas").remove();
+
+		    //create the canvas
+		    var canvas = document.createElement('canvas');
+		    canvas.id = 'gl_canvas';
+		    $(".canvas").append(canvas);
+
+		    //create the script that manipulates the canvas.
 	        var script = document.createElement('script');
 			script.type = 'text/javascript';
 			script.innerHTML = msg;

@@ -5,36 +5,37 @@ hr {
 
 }
 
-
 .mid_wrapper {
 	margin-top: 20px;
 }
 
-#nav_wrapper {
-	position: relative;
+#nav_wrapper > nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
-#nav_wrapper > h2 {
+#nav_wrapper > nav > h2 {
 	text-align: center;
 }
 
 
-#slide_menu > ul > li {
+#nav_wrapper > nav > ul > li {
 	color:black;
 	padding-top: 0px;
 	width: 550px;
 }
 
-#slide_menu > ul > li > p{
+#nav_wrapper > nav > ul > li > p{
 	font-size: 20px;
 	background: lightgray;
 }
 
-#slide_menu > ul > li > ul {
+#nav_wrapper > nav > ul > li > ul {
 	margin-left: -20px;
 }
 
-#slide_menu > ul > li > ul > li{
+#nav_wrapper > nav > ul > li > ul > li{
 	color:black;
 	padding-top: 0px;
 	padding-bottom: 0px;
@@ -42,7 +43,7 @@ hr {
 	width: 310px;
 }
 
-#slide_menu > ul > li > ul > li > p{
+#nav_wrapper > nav > ul > li > ul > li > p{
 	font-size: 16px;
 	background: lightgray;
 	margin: 10px;
