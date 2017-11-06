@@ -2,14 +2,18 @@
 var program;
 var gl;
 var canvas;
+var theta;
+var thetaLoc;
+
+var renderAmount = 0;
 
 var vertices = [
-vec2(1.0, 0.0),
-vec2(1.0, 1.0),
-vec2(0.0, 0.0)
+vec2(-0.5, 0.0),
+vec2(0.0, 0.5),
+vec2(0.0, -0.5),
+vec2(0.5, 0.0)
 ];
 
-//self-invoking function
 var init = function(){
 
     canvas = document.getElementById("gl_canvas");
@@ -35,12 +39,19 @@ var init = function(){
     gl.vertexAttribPointer(vPosition, 2, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(vPosition);
 
+    theta = 0.0;
+    thetaLoc = gl.getUniformLocation(program, "theta");
+    gl.uniform1f(thetaLoc, theta);
+
     render();
 }
 
 function render(){
-	gl.clear(gl.COLOR_BUFFER_BIT );
-    gl.drawArrays(gl.POINTS, 0, 3);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    theta += 0.1;
+    gl.uniform1f(thetaLoc, theta);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimFrame(render);
 };
 
 init();

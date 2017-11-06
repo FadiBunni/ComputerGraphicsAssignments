@@ -8,17 +8,24 @@
 	<link rel="stylesheet" href="css/main.css">
 	<script src="js/lib/jquery-3.2.1.min.js"></script>
 	<script src="js/lib/highlight.pack.js"></script>
-	<script type="text/javascript" src="js/lib/GraphicsEngine/webgl-utils.js"></script>
-	<script type="text/javascript" src="js/lib/GraphicsEngine/initShaders.js"></script>
-	<script type="text/javascript" src="js/lib/GraphicsEngine/MV.js"></script>
+	<script src="js/lib/highlightjs-line-numbers.min.js"></script>
+	<script>hljs.initLineNumbersOnLoad({singleLine: true});</script>
+	<script type="text/javascript" src="js/lib/graphicsEngine/webgl-utils.js"></script>
+	<script type="text/javascript" src="js/lib/graphicsEngine/initShaders.js"></script>
+	<script type="text/javascript" src="js/lib/graphicsEngine/MV.js"></script>
 </head>
 <body>
 	<div class="row justify-content-center top_wrapper">
 	    <div class="center-block">
 	      <h1>Welcome to course: Computer graphics - 02561</h1>
+	      <p id="important">Very Important stuff!!</p>
 	      <p>Below you can see all the assignments and its sub part, just choose one on the navigation bar.</p>
 	      <p>Optionally you can look at the files and see how each assignment is solved, but this application is ment to make it easier <br> for you.</p>
 	      <p>In the Javascript code the "window.onload" is executed in misc.js file, so we dont need to add it multiple times</p>
+	      <p>Some times the vertex and fragment shader does not load propperly, so you just need to reclick on the sub assignments until <br> they work.</p>
+	      <p>For moving parts the render function somehow get executed multiple times, so it looks like the objects are moving much faster <br> than programmed.
+	      To fix this either click on the sub assignments again, or reload the page ctrl-f5.
+	      </p>
 	      	<hr></hr>
 	    </div>
 	</div>

@@ -2,6 +2,7 @@ $(function () {
 	var categoryText;
 	var subCategoryText;
 
+
 	$("#nav_wrapper nav ul li ul").hide();
 
 	//slider nav
@@ -34,48 +35,68 @@ function categoryAndSubcategoryText(categoryText, subCategoryText){
 function readAndPrintFileContent(CategoryTexts){
 	var categoryText = CategoryTexts[0];
 	var subCategoryText = CategoryTexts[1];
-	console.log('Assignments/' + categoryText + '/' + subCategoryText + '/js/shaders/vshader21.glsl');
+	console.log('assignments/' + categoryText + '/' + subCategoryText + '/js/shaders/vshader21.glsl');
 
 	//Get vertex shader text
 	$.ajax({
 		type: 'GET',
-		url: 'Assignments/' + categoryText + '/' + subCategoryText + '/js/shaders/vshader21.glsl',
+		url: 'assignments/' + categoryText + '/' + subCategoryText + '/js/shaders/vshader21.glsl',
 		error: function(xhr, statusText) {
 		 	$("#vertex_shader").text("ERROR: NO CODE!");
 		 },
 		success: function(msg){
 		 	$("#vertex_shader").text(msg);
 		    $('#vertex_shader').each(function(i, e) {
-	            hljs.highlightBlock(e)
-
-	            //TODO - Add line numbers!
+	            hljs.highlightBlock(e);
+	            hljs.lineNumbersBlock(e);
 	        });
 
-	        //TODO -- Load vertex shader
+		    if($("#vertex-shader").length){
+				//remove vertex-shader script
+	        	$("#vertex-shader").remove(vertexScript);
+	    	}
+
+	        //create the vertex-shader script
+	        var vertexScript  = document.createElement('script');
+	        vertexScript.id   = 'vertex-shader';
+	        vertexScript.type = 'x-shader/x-vertex';
+	        vertexScript.innerHTML  = msg;
+	        $("body").append(vertexScript);
 		}
 	});
 
 	//Get fragment shader text
 	$.ajax({
 		type: 'GET',
-		url: 'Assignments/' + categoryText + '/' + subCategoryText + '/js/shaders/fshader21.glsl',
+		url: 'assignments/' + categoryText + '/' + subCategoryText + '/js/shaders/fshader21.glsl',
 		error: function(xhr, statusText) {
 		 	$("#fragment_shader").text("ERROR: NO CODE!");
 		 },
 		success: function(msg){
 		 	$("#fragment_shader").text(msg);
 		    $('#fragment_shader').each(function(i, e) {
-	            hljs.highlightBlock(e)
+	            hljs.highlightBlock(e);
+	            hljs.lineNumbersBlock(e);
 	        });
 
-	         //TODO -- Load fragment shader
+
+		    if($("#fragment-shader").length){
+		    	 //remove fragment-shader script
+		    	$("#fragment-shader").remove(fragmentScript);
+			}
+       		//create the vertex-shader script
+	        var fragmentScript  = document.createElement('script');
+	        fragmentScript.id   = 'fragment-shader';
+	        fragmentScript.type = 'x-shader/x-fragment';
+	        fragmentScript.innerHTML  = msg;
+	        $("body").append(fragmentScript);
 		}
 	});
 
 	//Get index.html text
 	$.ajax({
 		type: 'GET',
-		url: 'Assignments/' + categoryText + '/' + subCategoryText + '/index.html',
+		url: 'assignments/' + categoryText + '/' + subCategoryText + '/index.html',
 		error: function(xhr, statusText) {
  		 	$("#html_code").text("ERROR: NO CODE!");
 		},
@@ -83,14 +104,17 @@ function readAndPrintFileContent(CategoryTexts){
 		 	$("#html_code").text(msg);
 		    $('#html_code').each(function(i, e) {
 	            hljs.highlightBlock(e)
+	            hljs.lineNumbersBlock(e);
 	        });
+
+	        // TODO - append html files such as buttons and fields etc.
 		}
 	});
 
 	//Get sketch.js text
 	$.ajax({
 		type: 'GET',
-		url: 'Assignments/' + categoryText + '/' + subCategoryText + '/js/sketch.js',
+		url: 'assignments/' + categoryText + '/' + subCategoryText + '/js/sketch.js',
 		error: function(xhr, statusText) {
 		 	$("#js_code").text("ERROR: NO CODE!");
 		 	$("#js_canvas").remove("#js_canvas");
@@ -100,10 +124,12 @@ function readAndPrintFileContent(CategoryTexts){
 		 	$("#js_code").text(msg);
 		    $('#js_code').each(function(i, e) {
 	            hljs.highlightBlock(e)
+	            hljs.lineNumbersBlock(e);
 	        });
-		    //first remove the sketch.js script nad canvas, if they exists
+
+		    //first remove the sketch.js script and canvas, if they exists
 		    $("#js_canvas").remove(script);
-		    $("#gl_canvas").remove();
+		    $("#gl_canvas").remove(canvas);
 
 		    //create the canvas
 		    var canvas = document.createElement('canvas');
