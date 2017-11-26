@@ -5,6 +5,8 @@ var canvas;
 var theta;
 var thetaLoc;
 
+var rendered = false;
+
 var renderAmount = 0;
 
 var vertices = [
@@ -43,12 +45,13 @@ var init = function(){
     thetaLoc = gl.getUniformLocation(program, "theta");
     gl.uniform1f(thetaLoc, theta);
 
-    render();
+    if(!rendered) render();
+    rendered = true;
 }
 
 function render(){
     gl.clear(gl.COLOR_BUFFER_BIT);
-    theta += 0.1;
+    theta += 0.01;
     gl.uniform1f(thetaLoc, theta);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     requestAnimFrame(render);

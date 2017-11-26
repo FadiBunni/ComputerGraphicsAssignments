@@ -2,7 +2,6 @@ $(function () {
 	var categoryText;
 	var subCategoryText;
 
-
 	$("#nav_wrapper nav ul li ul").hide();
 
 	//slider nav
@@ -11,6 +10,10 @@ $(function () {
 			$("#nav_wrapper ul ul").slideUp();
      		$(this).find('ul').slideDown();
   		}
+	});
+
+	$("#nav_wrapper > nav > ul > li > ul > li,#nav_wrapper > nav > ul > li > p").hover(function(){
+     	$(this).css("cursor", "pointer");
 	});
 
 	//return text of Worksheet
@@ -35,7 +38,7 @@ function categoryAndSubcategoryText(categoryText, subCategoryText){
 function readAndPrintFileContent(CategoryTexts){
 	var categoryText = CategoryTexts[0];
 	var subCategoryText = CategoryTexts[1];
-	console.log('assignments/' + categoryText + '/' + subCategoryText + '/js/shaders/vshader21.glsl');
+	//console.log('assignments/' + categoryText + '/' + subCategoryText + '/js/shaders/vshader21.glsl');
 
 	//Get vertex shader text
 	$.ajax({
@@ -107,7 +110,10 @@ function readAndPrintFileContent(CategoryTexts){
 	            hljs.lineNumbersBlock(e);
 	        });
 
-	        // TODO - append html files such as buttons and fields etc.
+	        $(".body").empty();
+
+	        var body = msg.substring(msg.indexOf("<body>")+6,msg.indexOf("</body>"));
+	        $(".body").append(body);
 		}
 	});
 
@@ -129,12 +135,6 @@ function readAndPrintFileContent(CategoryTexts){
 
 		    //first remove the sketch.js script and canvas, if they exists
 		    $("#js_canvas").remove(script);
-		    $("#gl_canvas").remove(canvas);
-
-		    //create the canvas
-		    var canvas = document.createElement('canvas');
-		    canvas.id = 'gl_canvas';
-		    $(".canvas").append(canvas);
 
 		    //create the script that manipulates the canvas.
 	        var script = document.createElement('script');

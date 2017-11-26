@@ -1,5 +1,4 @@
 //The window.onload event is executed in misc.js file. no need to run it twice.
-
 var program;
 var gl;
 var canvas;
@@ -7,6 +6,7 @@ var ySpeed;
 var yLoc;
 var dir = 1;
 
+var rendered = false;
 
 var noOfPoints = 100;
 var vertices = [];
@@ -41,13 +41,13 @@ var init = function(){
     yLoc = gl.getUniformLocation(program, "ySpeed");
     gl.uniform1f(yLoc, ySpeed);
 
-    render();
+    if(!rendered) render();
+    rendered = true;
 }
 
 
 function drawCircle() {
     var pointAngle = Math.PI*2 / noOfPoints;
-    console.log(vertices);
     vertices.push(vec2(0.0,0.0));
     for(var i = 0; i <= noOfPoints; i++) {
         var angle = pointAngle * i;
@@ -59,10 +59,12 @@ function drawCircle() {
 }
 
 function render() {
+
     if(ySpeed >= 0.5 || ySpeed <= -0.5) {
         dir *= -1;
     }
-    ySpeed += 0.01 * dir;
+    ySpeed += 0.001 * dir;
+    console.log(ySpeed);
 
     gl.clear(gl.COLOR_BUFFER_BIT);
     gl.uniform1f(yLoc, ySpeed);

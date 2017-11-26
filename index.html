@@ -13,6 +13,7 @@
 	<script type="text/javascript" src="js/lib/graphicsEngine/webgl-utils.js"></script>
 	<script type="text/javascript" src="js/lib/graphicsEngine/initShaders.js"></script>
 	<script type="text/javascript" src="js/lib/graphicsEngine/MV.js"></script>
+	<script type="text/javascript" src="js/lib/graphicsEngine/OBJParser.js"></script>
 </head>
 <body>
 	<div class="row justify-content-center top_wrapper">
@@ -46,24 +47,38 @@
 					</li>
 
 					<li>
-						<p>Worksheet 2: Getting started with WebGL</p>
+						<p>Worksheet 2: Input devices and interaction</p>
 						<ul id="left_nav">
-							<li><p>Part 1: </p></li>
-							<li><p>Part 2: </p></li>
-							<li><p>Part 3: </p></li>
-							<li><p>Part 4: </p></li>
-							<li><p>Part 5: </p></li>
+							<li><p>Part 1: Event handler to mouse click</p></li>
+							<li><p>Part 2: Button and color selection menu</p></li>
+							<li><p>Part 3: Different drawing modes</p></li>
+							<li><p>Part 4: Button for circle drawing mode</p></li>
 						</ul>
 					</li>
 
 					<li>
 						<p>Worksheet 3: Projections (virtual camera) and transformations</p>
 						<ul id="left_nav">
-							<li><p>Part 1: </p></li>
-							<li><p>Part 2: </p></li>
-							<li><p>Part 3: </p></li>
-							<li><p>Part 4: </p></li>
-							<li><p>Part 5: </p></li>
+							<li><p>Part 1: Draw a wireframe unit cube in isometric view</p></li>
+							<li><p>Part 2: Draw the unit cube in different classical perspective views</p></li>
+						</ul>
+					</li>
+					<li>
+						<p>Worksheet 4: Local illumination – Gouraud and Phong shading</p>
+						<ul id="left_nav">
+							<li><p>Part 1: Draw a sphere in perspective view</p></li>
+							<li><p>Part 2: Use depth buffer and back face culling to remove hidden surfaces</p></li>
+							<li><p>Part 3: Use Gouraud shading (with true normals) to draw a diffuse sphere lit by a distant,
+								white, directional light with direction (0, 0, −1)</p></li>
+							<li><p>Part 4: Implement the full Phong reflection model in the vertex shader</p></li>
+							<li><p>Part 5: Use Phong shading - Move Phong reflection model to frament shader and varying positions and normals 			across triangles instead of colors. [Angel 6.5.3, 6.10]</p></li>
+						</ul>
+					</li>
+					<li>
+						<p>Worksheet 5: Rendering a triangle mesh</p>
+						<ul id="left_nav">
+							<li><p>Part 3: Load OBJ file and add OBJParser.js </p></li>
+							<li><p>Part 4: Set up light sources from Worksheet 4 Part 5</p></li>
 						</ul>
 					</li>
 				</ul>
@@ -86,9 +101,11 @@
 		      	<p>Js-code</p>
 		      	<pre><code id="js_code" class="javascript"></code></pre>
 		    </div>
-		    <div class="col canvas">
+		    <div class="col">
 		      	<p>Canvas</p>
-		      	<canvas id="gl_canvas"></canvas>
+		      	<div class="body">
+
+		      	</div>
 		    </div>
 	    </div>
     </div>

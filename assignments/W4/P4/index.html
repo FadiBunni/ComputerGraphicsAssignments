@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<script id="vertex-shader" type="x-shader/x-vertex" src="js/shaders/vshader21.glsl"></script>
+	<script id="fragment-shader" type="x-shader/x-fragment" src="js/shaders/fshader21.glsl"></script>
+	<title>Exercise 4 Part 4</title>
+	<script type="text/javascript" src="../Common/webgl-utils.js"></script>
+	<script type="text/javascript" src="../Common/initShaders.js"></script>
+	<script type="text/javascript" src="../Common/MV.js"></script>
+	<script type="text/javascript" src="js/sketch.js"></script>
+</head>
+
+<body>
+	<canvas id="gl_canvas">
+		Oops ... your browser doesn't support the HTML5 canvas element
+	</canvas>
+	<button id = "Button1">Increase Subdivisions</button>
+	<button id = "Button2">Decrease Subdivisions</button>
+	<div>
+	Ambient Constant 0 <input id="ambSlide" type="range"
+	min="0" max="1" step="0.1" value="0.5" />
+	1 </div>
+	<div>
+	Diffuse Constant 0 <input id="diffSlide" type="range"
+	min="0" max="1" step="0.1" value="0.5" />
+	1 </div>
+	<div>
+	Specular Constant 0 <input id="specSlide" type="range"
+	min="0" max="1" step="0.1" value="0.5" />
+	1 </div>
+	<div>
+	Specular Shininess 0 <input id="shinSlide" type="range"
+	min="0" max="80" step="8" value="40" />
+	80 </div>
+	<div>
+	Light 0 <input id="lightSlide" type="range"
+	min="0" max="1" step="0.1" value="0.5" />
+	1 </div>
+
+	<br/>
+</body>
+</html>
