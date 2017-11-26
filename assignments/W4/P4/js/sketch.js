@@ -110,7 +110,6 @@ var init = function(){
     materialDiffuse = vec4(diffS*1.0, diffS*1.0, diffS*1.0, diffS*0.0 );
     materialSpecular = vec4(specS*1.0, specS*1.0, specS*1.0, specS*0.0 );
 
-
     var ambientProduct = mult(light, materialAmbient);
     var diffuseProduct = mult(light, materialDiffuse);
     var specularProduct = mult(light, materialSpecular);
@@ -145,22 +144,27 @@ var init = function(){
     };
     document.getElementById("ambSlide").oninput = function() {
         ambS = event.srcElement.value;
+        index = 0;
         init();
     };
     document.getElementById("diffSlide").oninput = function() {
         diffS = event.srcElement.value;
+        index = 0;
         init();
     };
     document.getElementById("specSlide").oninput = function() {
         specS = event.srcElement.value;
+        index = 0;
         init();
     };
     document.getElementById("lightSlide").oninput = function() {
         lightS = event.srcElement.value;
+        index = 0;
         init();
     };
     document.getElementById("shinSlide").oninput = function() {
         materialShininess = event.srcElement.value;
+        index = 0;
         init();
     };
 

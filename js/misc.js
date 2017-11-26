@@ -65,83 +65,85 @@ function readAndPrintFileContent(CategoryTexts){
 	        vertexScript.type = 'x-shader/x-vertex';
 	        vertexScript.innerHTML  = msg;
 	        $("body").append(vertexScript);
-		}
-	});
-
-	//Get fragment shader text
-	$.ajax({
-		type: 'GET',
-		url: 'assignments/' + categoryText + '/' + subCategoryText + '/js/shaders/fshader21.glsl',
-		error: function(xhr, statusText) {
-		 	$("#fragment_shader").text("ERROR: NO CODE!");
-		 },
-		success: function(msg){
-		 	$("#fragment_shader").text(msg);
-		    $('#fragment_shader').each(function(i, e) {
-	            hljs.highlightBlock(e);
-	            hljs.lineNumbersBlock(e);
-	        });
-
-
-		    if($("#fragment-shader").length){
-		    	 //remove fragment-shader script
-		    	$("#fragment-shader").remove(fragmentScript);
-			}
-       		//create the vertex-shader script
-	        var fragmentScript  = document.createElement('script');
-	        fragmentScript.id   = 'fragment-shader';
-	        fragmentScript.type = 'x-shader/x-fragment';
-	        fragmentScript.innerHTML  = msg;
-	        $("body").append(fragmentScript);
-		}
-	});
-
-	//Get index.html text
-	$.ajax({
-		type: 'GET',
-		url: 'assignments/' + categoryText + '/' + subCategoryText + '/index.html',
-		error: function(xhr, statusText) {
- 		 	$("#html_code").text("ERROR: NO CODE!");
 		},
-		success: function(msg){
-		 	$("#html_code").text(msg);
-		    $('#html_code').each(function(i, e) {
-	            hljs.highlightBlock(e)
-	            hljs.lineNumbersBlock(e);
-	        });
+		complete: function(){
+			//Get fragment shader text
+			$.ajax({
+				type: 'GET',
+				url: 'assignments/' + categoryText + '/' + subCategoryText + '/js/shaders/fshader21.glsl',
+				error: function(xhr, statusText) {
+				 	$("#fragment_shader").text("ERROR: NO CODE!");
+				 },
+				success: function(msg){
+				 	$("#fragment_shader").text(msg);
+				    $('#fragment_shader').each(function(i, e) {
+			            hljs.highlightBlock(e);
+			            hljs.lineNumbersBlock(e);
+			        });
 
-	        $(".body").empty();
+				    if($("#fragment-shader").length){
+				    	 //remove fragment-shader script
+				    	$("#fragment-shader").remove(fragmentScript);
+					}
+		       		//create the vertex-shader script
+			        var fragmentScript  = document.createElement('script');
+			        fragmentScript.id   = 'fragment-shader';
+			        fragmentScript.type = 'x-shader/x-fragment';
+			        fragmentScript.innerHTML  = msg;
+			        $("body").append(fragmentScript);
+				},
+				complete: function(){
+					//Get index.html text
+					$.ajax({
+						type: 'GET',
+						url: 'assignments/' + categoryText + '/' + subCategoryText + '/index.html',
+						error: function(xhr, statusText) {
+				 		 	$("#html_code").text("ERROR: NO CODE!");
+						},
+						success: function(msg){
+						 	$("#html_code").text(msg);
+						    $('#html_code').each(function(i, e) {
+					            hljs.highlightBlock(e)
+					            hljs.lineNumbersBlock(e);
+					        });
 
-	        var body = msg.substring(msg.indexOf("<body>")+6,msg.indexOf("</body>"));
-	        $(".body").append(body);
-		}
-	});
+					        $(".body").empty();
 
-	//Get sketch.js text
-	$.ajax({
-		type: 'GET',
-		url: 'assignments/' + categoryText + '/' + subCategoryText + '/js/sketch.js',
-		error: function(xhr, statusText) {
-		 	$("#js_code").text("ERROR: NO CODE!");
-		 	$("#js_canvas").remove("#js_canvas");
-		},
-		success: function(msg){
-			//highlight the javascript code
-		 	$("#js_code").text(msg);
-		    $('#js_code').each(function(i, e) {
-	            hljs.highlightBlock(e)
-	            hljs.lineNumbersBlock(e);
-	        });
+					        var body = msg.substring(msg.indexOf("<body>")+6,msg.indexOf("</body>"));
+					        $(".body").append(body);
+						},
+						complete: function(){
+							//Get sketch.js text
+							$.ajax({
+								type: 'GET',
+								url: 'assignments/' + categoryText + '/' + subCategoryText + '/js/sketch.js',
+								error: function(xhr, statusText) {
+								 	$("#js_code").text("ERROR: NO CODE!");
+								 	$("#js_canvas").remove("#js_canvas");
+								},
+								success: function(msg){
+									//highlight the javascript code
+								 	$("#js_code").text(msg);
+								    $('#js_code').each(function(i, e) {
+							            hljs.highlightBlock(e)
+							            hljs.lineNumbersBlock(e);
+							        });
 
-		    //first remove the sketch.js script and canvas, if they exists
-		    $("#js_canvas").remove(script);
+								    //first remove the sketch.js script and canvas, if they exists
+								    $("#js_canvas").remove(script);
 
-		    //create the script that manipulates the canvas.
-	        var script = document.createElement('script');
-			script.type = 'text/javascript';
-			script.innerHTML = msg;
-			script.id = 'js_canvas'
-			$("body").append(script);
+								    //create the script that manipulates the canvas.
+							        var script = document.createElement('script');
+									script.type = 'text/javascript';
+									script.innerHTML = msg;
+									script.id = 'js_canvas'
+									$("body").append(script);
+								}
+							});
+						}
+					});
+				}
+			});
 		}
 	});
 }
