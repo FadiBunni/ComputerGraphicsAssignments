@@ -19,66 +19,108 @@
 	<div class="row justify-content-center top_wrapper">
 	    <div class="center-block">
 	      <h1>Welcome to course: Computer graphics - 02561</h1>
+	      <h3>Fadi Bunni - s154072 & Jacob Pjetursson - s153718</h2>
 	      <p id="important">Very Important stuff!!</p>
-	      <p>Below you can see all the assignments and its sub part, just choose one on the navigation bar.</p>
+	      <p>Below you can see all the assignments and their subpart, just choose one by clicking on the navigation bar to the left.</p>
 	      <p>Optionally you can look at the files and see how each assignment is solved, but this application is ment to make it easier <br> for you.</p>
+	      <p>Optional parts has not been made, thus they are not included. Also parts that requires answering question can only be found <br> in the report.</p>
 	      <p>In the Javascript code the "window.onload" is executed in misc.js file, so we dont need to add it multiple times</p>
-	      <p>Some times the vertex and fragment shader does not load propperly, so you just need to reclick on the sub assignments until <br> they work. <strong>This bug is probably fixed now</strong></p>
-	      <p>For moving parts the render function somehow get executed multiple times, so it looks like the objects are moving much faster <br> than programmed.
-	      To fix this either click on the sub assignments again, or reload the page ctrl-f5.
-	      </p>
+	      <p>Some times the vertex and fragment shader does not load propperly, so you just need to reclick on the sub parts until <br> they work. <strong>This bug should be  fixed now.</strong></p>
+	      <p>For moving parts the render function somehow get executed multiple times, this result in objects speed increasing exponentially.<br>
+	      To fix this either click on the sub assignments again, or reload the page ctrl-f5. (best option recommended)</p>
 	      	<hr></hr>
 	    </div>
 	</div>
   	<div class="row justify-content-center mid_wrapper">
 	    <div class="col-2 col-sm-4" id="nav_wrapper">
 	    	<nav>
-				<h2>Pick a worksheet and a part</h2>
+				<h2>Pick a worksheet and a subpart</h2>
 				<ul>
 					<li>
 						<p>Worksheet 1: Getting started with WebG</p>
 						<ul id="left_nav">
-							<li><p>Part 1: Setup a basic WebGL application</p></li>
-							<li><p>Part 2: Shaders and buffers</p></li>
-							<li><p>Part 3: Triangles</p></li>
-							<li><p>Part 4: A rotating square</p></li>
-							<li><p>Part 5: A fan of triangles</p></li>
+							<li><p><strong>Part 1:</strong> Setup a basic WebGL application</p></li>
+							<li><p><strong>Part 2:</strong> Shaders and buffers</p></li>
+							<li><p><strong>Part 3:</strong> Triangles</p></li>
+							<li><p><strong>Part 4:</strong> A rotating square</p></li>
+							<li><p><strong>Part 5:</strong> A fan of triangles</p></li>
 						</ul>
 					</li>
 
 					<li>
 						<p>Worksheet 2: Input devices and interaction</p>
 						<ul id="left_nav">
-							<li><p>Part 1: Event handler to mouse click</p></li>
-							<li><p>Part 2: Button and color selection menu</p></li>
-							<li><p>Part 3: Different drawing modes</p></li>
-							<li><p>Part 4: Button for circle drawing mode</p></li>
+							<li><p><strong>Part 1:</strong> Event handler to mouse click</p></li>
+							<li><p><strong>Part 2:</strong> Button and color selection menu</p></li>
+							<li><p><strong>Part 3:</strong> Different drawing modes</p></li>
+							<li><p><strong>Part 4:</strong> Button for circle drawing mode</p></li>
 						</ul>
 					</li>
-
 					<li>
 						<p>Worksheet 3: Projections (virtual camera) and transformations</p>
 						<ul id="left_nav">
-							<li><p>Part 1: Draw a wireframe unit cube in isometric view</p></li>
-							<li><p>Part 2: Draw the unit cube in different classical perspective views</p></li>
+							<li><p><strong>Part 1:</strong> Draw a wireframe unit cube in isometric view</p></li>
+							<li><p><strong>Part 2:</strong> Draw the unit cube in different classical perspective views</p></li>
 						</ul>
 					</li>
 					<li>
 						<p>Worksheet 4: Local illumination – Gouraud and Phong shading</p>
 						<ul id="left_nav">
-							<li><p>Part 1: Draw a sphere in perspective view</p></li>
-							<li><p>Part 2: Use depth buffer and back face culling to remove hidden surfaces</p></li>
-							<li><p>Part 3: Use Gouraud shading (with true normals) to draw a diffuse sphere lit by a distant,
+							<li><p><strong>Part 1:</strong> Draw a sphere in perspective view</p></li>
+							<li><p><strong>Part 2:</strong> Use depth buffer and back face culling to remove hidden surfaces</p></li>
+							<li><p><strong>Part 3:</strong>Use Gouraud shading (with true normals) to draw a diffuse sphere lit by a distant,
 								white, directional light with direction (0, 0, −1)</p></li>
-							<li><p>Part 4: Implement the full Phong reflection model in the vertex shader</p></li>
-							<li><p>Part 5: Use Phong shading - Move Phong reflection model to frament shader and varying positions and normals 			across triangles instead of colors. [Angel 6.5.3, 6.10]</p></li>
+							<li><p><strong>Part 4:</strong> Implement the full Phong reflection model in the vertex shader</p></li>
+							<li><p><strong>Part 5:</strong> Use Phong shading - Move Phong reflection model to frament shader and varying positions and normals across triangles instead of colors. [Angel 6.5.3, 6.10]</p></li>
 						</ul>
 					</li>
 					<li>
 						<p>Worksheet 5: Rendering a triangle mesh</p>
 						<ul id="left_nav">
-							<li><p>Part 3: Load OBJ file and add OBJParser.js </p></li>
-							<li><p>Part 4: Set up light sources from Worksheet 4 Part 5</p></li>
+							<li><p><strong>Part 3:</strong> Load OBJ file and add OBJParser.js</p></li>
+							<li><p><strong>Part 4:</strong> Set up light sources from Worksheet 4 Part 5</p></li>
+						</ul>
+					</li>
+					<li>
+						<p>Worksheet 6: Texture mapping</p>
+						<ul id="left_nav">
+							<li><p><strong>Part 1:</strong> Create a rectangle with vertices (−4, −1, −1), (4, −1, −1), (4, −1, −21),
+									(−4, −1, −21). Set up a perspective camera with a 90° field of view. Use the
+									default view matrix and draw the rectangle in white on a blue background.
+									Map a procedurally generated checkerboard texture to the rectangle using the
+									following steps</p></li>
+							<li><p><strong>Part 2:</strong> Create buttons and/or selection menus that enable you to switch between
+									different texture wrapping modes (repeat or clamp-to-edge) and different
+									texture filtering modes (nearest, linear, mipmap). [Angel 3.6, 7.5.3, 7.5.4]</p></li>
+							<li><p><strong>Part 3:</strong> Start from a diffuse sphere illuminated by a directional light (Part 3 of
+									Worksheet 4). We will now map an earth texture onto the sphere. To do this,
+									we load the texture from an image file and calculate the texture coordinates in
+									the fragment shader</p></li>
+						</ul>
+					</li>
+					<li>
+						<p>Worksheet 7: Projection shadows and render pipeline</p>
+						<ul id="left_nav">
+							<li><p><strong>Part 1:</strong> Scene</p></li>
+							<li><p><strong>Part 2:</strong> Projection shadows</p></li>
+							<li><p><strong>Part 3:</strong> Shadow polygon culling using the z-buffer</p></li>
+							<li><p><strong>Part 4:</strong> Ambient light in shadows using transparency</p></li>
+						</ul>
+					</li>
+					<li>
+						<p>Worksheet 8: Shadow mapping </p>
+						<ul id="left_nav">
+							<li><p><strong>Part 1:</strong> Scene and projection shadows for reference</p></li>
+							<li><p><strong>Part 2:</strong> Shadow mapping</p></li>
+						</ul>
+					</li>
+					<li>
+						<p>Worksheet 9: Reflections</p>
+						<ul id="left_nav">
+							<li><p><strong>Part 1:</strong>  Reflected object</p></li>
+							<li><p><strong>Part 2:</strong> : Reflector</p></li>
+							<li><p><strong>Part 3:</strong>  Stencil buffer for clipping</p></li>
+							<li><p><strong>Part 4:</strong>  Clipping submerged objects using the view frustum</p></li>
 						</ul>
 					</li>
 				</ul>

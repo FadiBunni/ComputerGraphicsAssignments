@@ -55,7 +55,7 @@ var init = function(){
     var specularProduct = mult(light, materialSpecular);
 
     model = initVertexBuffers(gl, program);
-    readOBJFile('assignments/W5/P4/js/teapot.obj',1, true);
+    readOBJFile('assignments/W5/teapot.obj',1, true);
 
     modelViewMatrixLoc = gl.getUniformLocation(program, "modelViewMatrix");
     projectionMatrixLoc = gl.getUniformLocation(program, "projectionMatrix");

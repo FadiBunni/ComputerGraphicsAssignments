@@ -40,7 +40,7 @@ var init = function(){
     gl.useProgram( program );
 
     model = initVertexBuffers(gl, program);
-    readOBJFile('assignments/W5/P3/js/suzanne.obj', 1, true);
+    readOBJFile('assignments/W5/suzanne.obj', 1, true);
 
     modelViewMatrixLoc = gl.getUniformLocation(program, "modelViewMatrix");
     projectionMatrixLoc = gl.getUniformLocation(program, "projectionMatrix");

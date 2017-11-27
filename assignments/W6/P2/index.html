@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<script id="vertex-shader" type="x-shader/x-vertex" src="js/shaders/vshader21.glsl"></script>
+	<script id="fragment-shader" type="x-shader/x-fragment" src="js/shaders/fshader21.glsl"></script>
+	<title>Exercise 6 Part 2</title>
+	<script type="text/javascript" src="../Common/webgl-utils.js"></script>
+	<script type="text/javascript" src="../Common/initShaders.js"></script>
+	<script type="text/javascript" src="../Common/MV.js"></script>
+	<script type="text/javascript" src="../Common/OBJParser.js"></script>
+	<script type="text/javascript" src="js/sketch.js"></script>
+</head>
+
+<body>
+	<canvas id="gl_canvas">
+		Oops ... your browser doesn't support the HTML5 canvas element
+	</canvas>
+	<br/>
+	<select id="selectTexWrap" size="2">
+		<option value="0">Repeat</option>
+		<option value="1">Clamp-To-Edge</option>
+	</select>
+	<select id="selectTexFilter" size="3">
+		<option value="0">Nearest</option>
+		<option value="1">Linear</option>
+		<option value="2">Mipmap</option>
+	</select>
+</body>
+</html>
