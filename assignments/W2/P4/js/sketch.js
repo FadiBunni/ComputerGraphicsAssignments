@@ -121,7 +121,6 @@ var init = function(){
             triangleVNo = 0;
         };
 
-
     gl.viewport(0, 0, canvas.width, canvas.height);
 
     var t = vec4(colors[cIndex]);
@@ -170,6 +169,8 @@ function render() {
         gl.drawArrays(gl.TRIANGLE_FAN, circles[i],pointsInCircle+2)
     }
     window.requestAnimFrame(render,canvas);
+
+    //TODO - The last drawm OBJ should be on top of everything else
 }
 
 init();

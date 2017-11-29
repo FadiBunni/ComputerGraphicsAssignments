@@ -18,7 +18,7 @@ var far = 10;
 var fov = 45;
 var aspect;
 var radius = 5.0;
-var theta  = 1.6; // changed from 0 to 1.6
+var theta  = 0; // changed from 0 to 1.6
 var phi    = 0.0;
 var eye;
 var at = vec3(0, 0.0, 0);
@@ -55,7 +55,7 @@ var init = function(){
     var specularProduct = mult(light, materialSpecular);
 
     model = initVertexBuffers(gl, program);
-    readOBJFile('assignments/W5/teapot.obj',1, true);
+    readOBJFile('assignments/W5/suzanne.obj',1, true);
 
     modelViewMatrixLoc = gl.getUniformLocation(program, "modelViewMatrix");
     projectionMatrixLoc = gl.getUniformLocation(program, "projectionMatrix");

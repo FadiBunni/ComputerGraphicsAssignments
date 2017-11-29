@@ -35,9 +35,9 @@ function categoryAndSubcategoryText(categoryText, subCategoryText){
 	return [splitCategoryText, splitSubCategoryText];
 };
 
-function readAndPrintFileContent(CategoryTexts){
-	var categoryText = CategoryTexts[0];
-	var subCategoryText = CategoryTexts[1];
+function readAndPrintFileContent(categoryTexts){
+	var categoryText = categoryTexts[0];
+	var subCategoryText = categoryTexts[1];
 	//console.log('assignments/' + categoryText + '/' + subCategoryText + '/js/shaders/vshader21.glsl');
 
 	//Get vertex shader text for assignment 1 to 7
@@ -55,9 +55,13 @@ function readAndPrintFileContent(CategoryTexts){
 		            hljs.lineNumbersBlock(e);
 		        });
 
+	        	$("#vertex-shader-obj").remove();
+	        	$("#vertex-shader-ground").remove();
+	        	$("#vertex-shader-shadow").remove();
+
 			    if($("#vertex-shader").length){
 					//remove vertex-shader script
-		        	$("#vertex-shader").remove(vertexScript);
+					$("#vertex-shader").remove(vertexScript);
 		    	}
 
 		        //create the vertex-shader script
@@ -81,6 +85,10 @@ function readAndPrintFileContent(CategoryTexts){
 				            hljs.highlightBlock(e);
 				            hljs.lineNumbersBlock(e);
 				        });
+
+				        $("#fragment-shader-obj").remove();
+		        		$("#fragment-shader-ground").remove();
+		        		$("#fragment-shader-shadow").remove();
 
 					    if($("#fragment-shader").length){
 					    	 //remove fragment-shader script
@@ -108,8 +116,10 @@ function readAndPrintFileContent(CategoryTexts){
 						            hljs.lineNumbersBlock(e);
 						        });
 
+							    //Emptying the body tag
 						        $(".body").empty();
 
+						        //Get the content inside the body tag from the assignments and append it to body tagin index.html
 						        var body = msg.substring(msg.indexOf("<body>")+6,msg.indexOf("</body>"));
 						        $(".body").append(body);
 							},
@@ -138,7 +148,7 @@ function readAndPrintFileContent(CategoryTexts){
 										script.type = 'text/javascript';
 										script.innerHTML = msg;
 										script.id = 'js_canvas'
-										$("body").append(script);
+										$("body").eval(script);
 									}
 								});
 							}
@@ -166,6 +176,8 @@ function readAndPrintFileContent(CategoryTexts){
 		            hljs.lineNumbersBlock(e);
 		        });
 
+		        $("#vertex-shader").remove();
+
 			    if($("#vertex-shader-ground").length){
 					//remove vertex-shader script
 		        	$("#vertex-shader-ground").remove(vertexScript);
@@ -191,6 +203,8 @@ function readAndPrintFileContent(CategoryTexts){
 				            hljs.highlightBlock(e);
 				            hljs.lineNumbersBlock(e);
 				        });
+
+				        $("#fragment-shader").remove();
 
 					    if($("#fragment-shader-ground").length){
 					    	 //remove fragment-shader script
@@ -349,7 +363,7 @@ function readAndPrintFileContent(CategoryTexts){
 																		script.type = 'text/javascript';
 																		script.innerHTML = msg;
 																		script.id = 'js_canvas'
-																		$("body").append(script);
+																		$("body").eval(script);
 																	}
 																});
 															}
