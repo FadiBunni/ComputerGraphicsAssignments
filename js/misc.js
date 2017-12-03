@@ -24,8 +24,10 @@ $(function () {
 	//return text of parts
 	$("#left_nav > li > p").on("click", function(){
 		subCategoryText = $(this).text();
-		readAndPrintFileContent(categoryAndSubcategoryText(categoryText,subCategoryText));
+			readAndPrintFileContent(categoryAndSubcategoryText(categoryText,subCategoryText));
+
 	});
+
 
 });
 
@@ -38,6 +40,7 @@ function categoryAndSubcategoryText(categoryText, subCategoryText){
 function readAndPrintFileContent(categoryTexts){
 	var categoryText = categoryTexts[0];
 	var subCategoryText = categoryTexts[1];
+
 	//console.log('assignments/' + categoryText + '/' + subCategoryText + '/js/shaders/vshader21.glsl');
 
 	//Get vertex shader text for assignment 1 to 7
@@ -55,9 +58,11 @@ function readAndPrintFileContent(categoryTexts){
 		            hljs.lineNumbersBlock(e);
 		        });
 
+
 	        	$("#vertex-shader-obj").remove();
 	        	$("#vertex-shader-ground").remove();
 	        	$("#vertex-shader-shadow").remove();
+
 
 			    if($("#vertex-shader").length){
 					//remove vertex-shader script
@@ -134,9 +139,12 @@ function readAndPrintFileContent(categoryTexts){
 									},
 									success: function(msg){
 										//highlight the javascript code
+
 									 	$("#js_code").text(msg);
+
 									    $('#js_code').each(function(i, e) {
 								            hljs.highlightBlock(e)
+
 								            hljs.lineNumbersBlock(e);
 								        });
 
@@ -363,7 +371,7 @@ function readAndPrintFileContent(categoryTexts){
 																		script.type = 'text/javascript';
 																		script.innerHTML = msg;
 																		script.id = 'js_canvas'
-																		$("body").eval(script);
+																		$("body").append(script);
 																	}
 																});
 															}

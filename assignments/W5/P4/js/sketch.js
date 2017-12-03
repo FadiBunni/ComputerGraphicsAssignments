@@ -28,7 +28,7 @@ var g_objDoc;
 var g_drawinginfo;
 var model;
 
-var init = function(){
+var init = function() {
     canvas = document.getElementById( "gl_canvas" );
         canvas.width = 512;
         canvas.height = 512;
@@ -71,7 +71,6 @@ var init = function(){
        "lightPosition"),flatten(lightPosition) );
     gl.uniform1f( gl.getUniformLocation(program,
        "shininess"),materialShininess );
-
     waitToRender();
 }
 
@@ -127,7 +126,7 @@ function readOBJFile(fileName, scale, reverse) {
     request.onreadystatechange = function() {
         if (request.readyState === 4 && request.status !== 404) {
             onReadOBJFile(request.responseText, fileName, scale, reverse);
-            console.log(request.responseText,fileName);
+            //console.log(request.responseText,fileName);
         }
     }
     request.send();
@@ -158,5 +157,9 @@ function render(){
     gl.uniformMatrix3fv(normalMatrixLoc, false, flatten(normalM));
     gl.drawElements(gl.TRIANGLES, g_drawinginfo.indices.length, gl.UNSIGNED_SHORT, 0);
     window.requestAnimFrame(render);
+    initbool = false;
 }
+
 init();
+
+
