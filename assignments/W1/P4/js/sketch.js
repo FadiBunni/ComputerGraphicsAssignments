@@ -45,8 +45,7 @@ var init = function(){
     thetaLoc = gl.getUniformLocation(program, "theta");
     gl.uniform1f(thetaLoc, theta);
 
-    if(!rendered) render();
-    rendered = true;
+    render();
 }
 
 function render(){
@@ -54,6 +53,7 @@ function render(){
     theta += 0.01;
     gl.uniform1f(thetaLoc, theta);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    if(interrupted) return; // ignore this line of code!
     requestAnimFrame(render);
 };
 

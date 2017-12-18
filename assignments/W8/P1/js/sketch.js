@@ -211,7 +211,8 @@ function render(){
     drawGround(gl, groundProgram, groundObject, texture, modelViewMatrix);
     // DRAW TEAPOT
     drawObj(gl, objProgram, teapotObject, modelViewMatrix);
-
+    
+    if(interrupted) return; // ignore this line of code!
     window.requestAnimFrame(render);
 }
 

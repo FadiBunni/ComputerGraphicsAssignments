@@ -69,6 +69,7 @@ function render() {
     gl.clear(gl.COLOR_BUFFER_BIT);
     gl.uniform1f(yLoc, ySpeed);
     gl.drawArrays(gl.TRIANGLE_FAN, 0, vertices.length);
+    if(interrupted) return; // ignore this line of code!
     requestAnimFrame(render);
 }
 

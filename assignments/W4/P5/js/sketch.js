@@ -197,6 +197,7 @@ function render()
     for( var i=0; i<index; i+=3) {
         gl.drawArrays( gl.TRIANGLES, i, 3 );
     }
+    if(interrupted) return; // ignore this line of code!
     requestAnimFrame(render);
 }
 

@@ -1,6 +1,7 @@
 $(function () {
 	var categoryText;
 	var subCategoryText;
+	interrupted = false;
 
 	$("#nav_wrapper nav ul li ul").hide();
 
@@ -25,15 +26,14 @@ $(function () {
 	$("#left_nav > li > p").on("click", function(){
 		subCategoryText = $(this).text();
 			readAndPrintFileContent(categoryAndSubcategoryText(categoryText,subCategoryText));
-
 	});
-
-
 });
 
 function categoryAndSubcategoryText(categoryText, subCategoryText){
+	interrupted = true;
 	var splitCategoryText = categoryText.slice(0,1) + categoryText.slice(10,11);
 	var splitSubCategoryText = subCategoryText.slice(0,1) + subCategoryText.slice(5,6);
+	
 	return [splitCategoryText, splitSubCategoryText];
 };
 
@@ -139,7 +139,7 @@ function readAndPrintFileContent(categoryTexts){
 									},
 									success: function(msg){
 										//highlight the javascript code
-
+										interrupted = false;
 									 	$("#js_code").text(msg);
 
 									    $('#js_code').each(function(i, e) {
@@ -150,13 +150,16 @@ function readAndPrintFileContent(categoryTexts){
 
 									    //first remove the sketch.js script and canvas, if they exists
 									    $("#js_canvas").remove(script);
-
 									    //create the script that manipulates the canvas.
 								        var script = document.createElement('script');
 										script.type = 'text/javascript';
 										script.innerHTML = msg;
 										script.id = 'js_canvas'
-										$("body").eval(script);
+										if(categoryText == "W2" && (subCategoryText == "P3" || subCategoryText == "P4")){
+											$("body").eval(script);
+										}else {
+											$("body").append(script);
+										}
 									}
 								});
 							}
@@ -357,6 +360,7 @@ function readAndPrintFileContent(categoryTexts){
 																	},
 																	success: function(msg){
 																		//highlight the javascript code
+																		interrupted = false;
 																	 	$("#js_code").text(msg);
 																	    $('#js_code').each(function(i, e) {
 																            hljs.highlightBlock(e)

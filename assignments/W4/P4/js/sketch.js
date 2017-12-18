@@ -85,10 +85,10 @@ function tetrahedron(a, b, c, d, n){
 }
 
 var init = function(){
-     console.log('hey');
     canvas = document.getElementById( "gl_canvas" );
         canvas.width = 512;
         canvas.height = 512;
+        
     gl = WebGLUtils.setupWebGL( canvas );
     if ( !gl ) alert( "WebGL isn't available" );
 
@@ -195,7 +195,6 @@ function render(){
     projectionMatrix = perspective(fov, aspect, near, far);
 
     phi += 0.005;
-    console.log(phi);
 
     var normalM = normalMatrix(modelViewMatrix, true);
 
@@ -206,6 +205,8 @@ function render(){
     for( var i=0; i<index; i+=3) {
         gl.drawArrays( gl.TRIANGLES, i, 3 );
     }
+
+    if(interrupted) return; // ignore this line of code!
     requestAnimationFrame(render);
 }
 

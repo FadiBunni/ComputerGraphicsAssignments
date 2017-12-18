@@ -136,13 +136,14 @@ var init = function(){
     rendered = true;
 }
 
-function render()
-{
+function render(){
     gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     eye = vec3(radius*Math.sin(phi), radius*Math.sin(theta), radius*Math.cos(phi));
     modelViewMatrix = lookAt(eye, at , up);
     projectionMatrix = perspective(fov, aspect, near, far);
+
     phi += 0.005;
+
     var normalM = normalMatrix(modelViewMatrix, true);
     gl.uniformMatrix4fv(projectionMatrixLoc, false, flatten(projectionMatrix));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(modelViewMatrix));
@@ -151,6 +152,8 @@ function render()
     for( var i=0; i<index; i+=3) {
         gl.drawArrays( gl.TRIANGLES, i, 3 );
     }
+    
+    if(interrupted) return; // ignore this line of code!
     requestAnimFrame(render);
 }
 
