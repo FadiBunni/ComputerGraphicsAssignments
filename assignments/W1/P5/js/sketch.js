@@ -1,10 +1,10 @@
-//The window.onload event is executed in misc.js file. no need to run it twice.
 var program;
 var gl;
 var canvas;
-var ySpeed;
+
 var yLoc;
 var dir = 1;
+var yOffSet = 0;
 
 var rendered = false;
 
@@ -37,38 +37,36 @@ var init = function(){
     gl.vertexAttribPointer(vPosition, 2, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(vPosition);
 
-    ySpeed = 0.0;
-    yLoc = gl.getUniformLocation(program, "ySpeed");
-    gl.uniform1f(yLoc, ySpeed);
+    yLoc = gl.getUniformLocation(program, "yOffSet");
 
-    if(!rendered) render();
-    rendered = true;
+    render();
 }
 
 
 function drawCircle() {
-    var pointAngle = Math.PI*2 / noOfPoints;
-    vertices.push(vec2(0.0,0.0));
+    var pointAngle = Math.PI*2 / noOfPoints; //Angle between points
+    vertices.push(vec2(0.0,0.0)); //Center
     for(var i = 0; i <= noOfPoints; i++) {
         var angle = pointAngle * i;
         var x = Math.cos(angle) * 0.5;
         var y = Math.sin(angle) * 0.5;
-        var point = vec2(x,y);
+        var point = vec2(x,y); //Point on edge of circle
         vertices.push(point);
     }
 }
 
 function render() {
 
-    if(ySpeed >= 0.5 || ySpeed <= -0.5) {
+    if(yOffSet >= 0.5 || yOffSet <= -0.5) {
         dir *= -1;
     }
-    ySpeed += 0.001 * dir;
+    yOffSet += 0.01 * dir;
 
     gl.clear(gl.COLOR_BUFFER_BIT);
-    gl.uniform1f(yLoc, ySpeed);
+    gl.uniform1f(yLoc, yOffSet);
     gl.drawArrays(gl.TRIANGLE_FAN, 0, vertices.length);
-    if(interrupted) return; // ignore this line of code!
+
+    if(interrupted) return;
     requestAnimFrame(render);
 }
 

@@ -1,5 +1,3 @@
-//The window.onload event is executed in misc.js file. no need to run it twice.
-
 var program;
 var gl;
 var canvas;
@@ -17,7 +15,7 @@ var init = function(){
         alert("WebGL isn’t available");
     }
 
-    canvas.addEventListener("click", function(event){
+    canvas.addEventListener("mousedown", function(event){
         var rect = event.target.getBoundingClientRect();
         gl.bindBuffer( gl.ARRAY_BUFFER, vBuffer );
         var t = vec2(2*(event.clientX-rect.left)/canvas.width-1,
@@ -50,7 +48,7 @@ var init = function(){
 function render(){
     gl.clear(gl.COLOR_BUFFER_BIT );
     gl.drawArrays(gl.POINTS, 0, index);
-    window.requestAnimFrame(render,canvas);
+    window.requestAnimFrame(render);
 }
 
 init();

@@ -1,13 +1,8 @@
-//The window.onload event is executed in misc.js file. no need to run it twice.
 var program;
 var gl;
 var canvas;
-var theta;
+var theta = 0;
 var thetaLoc;
-
-var rendered = false;
-
-var renderAmount = 0;
 
 var vertices = [
 vec2(-0.5, 0.0),
@@ -41,7 +36,6 @@ var init = function(){
     gl.vertexAttribPointer(vPosition, 2, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(vPosition);
 
-    theta = 0.0;
     thetaLoc = gl.getUniformLocation(program, "theta");
     gl.uniform1f(thetaLoc, theta);
 
@@ -53,7 +47,7 @@ function render(){
     theta += 0.01;
     gl.uniform1f(thetaLoc, theta);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-    if(!interrupted) requestAnimFrame(render); // ignore this line of code!
+    if(!interrupted) requestAnimFrame(render)
 };
 
 init();

@@ -1,4 +1,3 @@
-//The window.onload event is executed in misc.js file. no need to run it twice.
 var program;
 var gl;
 var canvas;

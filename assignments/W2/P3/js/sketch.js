@@ -122,7 +122,7 @@ function render() {
     for(var i=0; i < triangles.length; i++) {
         gl.drawArrays(gl.TRIANGLES, triangles[i],3)
     }
-    window.requestAnimFrame(render,canvas);
+    window.requestAnimFrame(render);
 }
 
 init();
