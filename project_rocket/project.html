@@ -76,6 +76,8 @@ uniform float shininess;
 varying vec3 pos;
 varying vec4 fNormal;
 varying vec4 fColor;
+
+uniform vec4 mirrorColor;
 void main() {
 	vec4 shading;
 	vec3 light = (modelViewMatrix * lightPosition).xyz;
@@ -94,7 +96,7 @@ void main() {
 
 	shading = ambient + diffuse + specular;
 	shading.a = 1.0;
-	gl_FragColor = fColor * shading;
+	gl_FragColor = fColor * shading * mirrorColor;
 }
 </script>
 
@@ -115,6 +117,25 @@ void main() {
 }
 </script>
 
+<script id="vertex-shader-plane" type="x-shader/x-vertex">
+attribute vec4 a_Position;
+uniform mat4 projectionMatrix;
+uniform mat4 modelViewMatrix;
+
+void main() {
+  gl_Position = projectionMatrix * modelViewMatrix * a_Position;
+}
+</script>
+
+<script id="fragment-shader-plane" type="x-shader/x-fragment">
+precision mediump float;
+uniform vec4 color;
+
+void main() {
+  gl_FragColor = color;
+}
+</script>
+
 <script type="text/javascript" src="./common/webgl-utils.js"></script>
 <script type="text/javascript" src="./common/initshaders.js"></script>
 <script type="text/javascript" src="./common/mv.js"></script>
@@ -127,6 +148,16 @@ Oops ... your browser doesn't support the HTML5 canvas element
 </canvas>
 <br/>
 <button id = "lightRotation">Stop/Start Light Rotation</button>
+<button id = "resetRocket">Reset Rocket Position</button>
+
+<select id="selectMirrorColor" size="6">
+	<option value="0">Red</option>
+	<option value="1">Green</option>
+	<option value="2">Blue</option>
+	<option value="3">Yellow</option>
+	<option value="4">Pink</option>
+	<option value="6">White</option>
+</select>
 <h3><a href="../index.html">Go back</a></h3>
 </body>
 </html>

@@ -1,0 +1,9 @@
+# Blender MTL File: 'None'
+# frame Count: 2
+
+newmtl frame
+Kd 0.6 0.4 0.275 1.0
+
+
+newmtl decoration
+Kd 1 1 1 1

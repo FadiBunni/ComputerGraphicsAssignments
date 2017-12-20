@@ -2,16 +2,16 @@
 # Material Count: 6
 
 newmtl first_leg
-Kd 1.0 1.0 0.0 1.0
+Kd 1.0 1.0 0.2 1.0
 
 newmtl second_leg
-Kd 0.0 1.0 0.0 1.0
+Kd 0.2 1.0 0.2 1.0
 
 newmtl third_leg
-Kd 0.0 0.0 1.0 1.0
+Kd 0.2 0.2 1.0 1.0
 
 newmtl nuzzle
-Kd 0.0 0.0 0.0 1.0
+Kd 0.2 0.2 0.0 1.0
 
 newmtl window_border
 Kd 0.0 0.0 0.0 1.0
@@ -20,4 +20,4 @@ newmtl window_glass
 Kd 1.0 1.0 1.0 1.0
 
 newmtl body
-Kd 1.0 0.0 0.0 1.0
+Kd 1.0 0.2 0.2 1.0

@@ -64,7 +64,6 @@ function render() {
         dir *= -1;
     }
     ySpeed += 0.001 * dir;
-    console.log(ySpeed);
 
     gl.clear(gl.COLOR_BUFFER_BIT);
     gl.uniform1f(yLoc, ySpeed);

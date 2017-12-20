@@ -223,7 +223,7 @@ function onReadMTLFile(fileString, mtl) {
         continue; // Go to the next line
       case 'Kd':   // Read normal
         if (name == "") continue; // Go to the next line because of Error
-        var material = mtl.parseRGB(sp, name);
+        var material = mtl.parseRGBA(sp, name);
         mtl.materials.push(material);
         name = "";
         continue; // Go to the next line
@@ -322,11 +322,12 @@ MTLDoc.prototype.parseNewmtl = function (sp) {
   return sp.getWord();         // Get name
 }
 
-MTLDoc.prototype.parseRGB = function (sp, name) {
+MTLDoc.prototype.parseRGBA = function (sp, name) {
   var r = sp.getFloat();
   var g = sp.getFloat();
   var b = sp.getFloat();
-  return (new Material(name, r, g, b, 1));
+  var a = sp.getFloat();
+  return (new Material(name, r, g, b, a));
 }
 
 //------------------------------------------------------------------------------
@@ -354,7 +355,6 @@ var Normal = function (x, y, z) {
   this.y = y;
   this.z = z;
 }
-
 //------------------------------------------------------------------------------
 // Color Object
 //------------------------------------------------------------------------------

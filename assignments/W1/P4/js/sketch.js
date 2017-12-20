@@ -53,8 +53,7 @@ function render(){
     theta += 0.01;
     gl.uniform1f(thetaLoc, theta);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-    if(interrupted) return; // ignore this line of code!
-    requestAnimFrame(render);
+    if(!interrupted) requestAnimFrame(render); // ignore this line of code!
 };
 
 init();
