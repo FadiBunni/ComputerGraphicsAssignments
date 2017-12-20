@@ -21,7 +21,9 @@
 	      <h1>Computer Graphics 02561 Exercises</h1>
 	      <h3>Fadi Bunni - s154072 & Jacob Pjetursson - s153718</h3>
 	      <p>Below you can see all the weekly exercises and their subparts, together with comments for each of them. Choose one by clicking on the left navigation bar.</p>
+	      <h3>Read me!</h3>
 	      <p>In the Javascript code the "window.onload" is executed in misc.js file, so we dont need to add it multiple times</p>
+	      <p>Each subparts that have a moving object, also has an code added line that interrupts the render function, so that the render function <br> does not get executed multiple times when loading new parts, this exstra line of code should be completely ignored.</p>
 	      <h3>BUGS!!</h3>
 	      <p>OBJ files only loads properly the first time, you must reload the page second time! This is seen in worksheet 5, 8 and 9.  </p>
 	      <hr></hr>
@@ -129,6 +131,10 @@
 		      	<p>Canvas</p>
 		      	<div class="body">
 		      	</div>
+		    </div>
+		    <div class="col">
+		      	<p>Comments</p>
+		      	<p id="comments"></p>
 		    </div>
 		    <div class="col">
 		      	<p>Vertex shader</p>

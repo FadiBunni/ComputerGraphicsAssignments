@@ -41,8 +41,6 @@ function readAndPrintFileContent(categoryTexts){
 	var categoryText = categoryTexts[0];
 	var subCategoryText = categoryTexts[1];
 
-	//console.log('assignments/' + categoryText + '/' + subCategoryText + '/js/shaders/vshader21.glsl');
-
 	//Get vertex shader text for assignment 1 to 7
 	if(categoryText != 'W8' && categoryText != 'W9'){
 		$.ajax({
@@ -129,43 +127,65 @@ function readAndPrintFileContent(categoryTexts){
 						        $(".body").append(body);
 							},
 							complete: function(){
-								//Get sketch.js text
+								//Get comment.txt text
 								$.ajax({
 									type: 'GET',
-									url: 'assignments/' + categoryText + '/' + subCategoryText + '/js/sketch.js',
+									url: 'assignments/' + categoryText + '/' + subCategoryText + '/comment.txt',
 									error: function(xhr, statusText) {
-									 	$("#js_code").text("ERROR: NO CODE!");
-									 	$("#js_canvas").remove("#js_canvas");
+									 	$("#comments").text("Couldn't find any comment for this assignment.");
 									},
 									success: function(msg){
-										//highlight the javascript code
-										interrupted = false;
-									 	$("#js_code").text(msg);
 
-									    $('#js_code').each(function(i, e) {
+										$("#comments").text(msg);
+									    $('#comments').each(function(i, e) {
 								            hljs.highlightBlock(e)
-
-								            hljs.lineNumbersBlock(e);
 								        });
+									    //first remove the content of the comment section
+									    $("#comments").empty();
+									    //add the content to the comment section
+									    console.log(msg);
+										$("#comments").html(msg);
+									},
+									complete: function(){
+										//Get sketch.js text
+										$.ajax({
+											type: 'GET',
+											url: 'assignments/' + categoryText + '/' + subCategoryText + '/js/sketch.js',
+											dataType: 'text',
+											error: function(xhr, statusText) {
+											 	$("#js_code").text("ERROR: NO CODE!");
+											 	$("#js_canvas").remove("#js_canvas");
+											},
+											success: function(msg){
+												//highlight the javascript code
+												interrupted = false;
+											 	$("#js_code").text(msg);
 
-									    //first remove the sketch.js script and canvas, if they exists
-									    $("#js_canvas").remove(script);
-									    //create the script that manipulates the canvas.
-								        var script = document.createElement('script');
-										script.type = 'text/javascript';
-										script.innerHTML = msg;
-										script.id = 'js_canvas'
-										if(categoryText == "W2" && (subCategoryText == "P3" || subCategoryText == "P4")){
-											$("body").eval(script);
-										}else {
-											$("body").append(script);
-										}
+											    $('#js_code').each(function(i, e) {
+										            hljs.highlightBlock(e)
+
+										            hljs.lineNumbersBlock(e);
+										        });
+
+											    //first remove the sketch.js script and canvas, if they exists
+											    $("#js_canvas").remove(script);
+											    //create the script that manipulates the canvas.
+										        var script = document.createElement('script');
+												script.type = 'text/javascript';
+												script.innerHTML = msg;
+												script.id = 'js_canvas'
+												if(categoryText == "W2" && (subCategoryText == "P3" || subCategoryText == "P4")){
+													$("body").eval(script);
+												}else {
+													$("body").append(script);
+												}
+											}
+										});
 									}
 								});
 							}
 						});
 					}
-
 				});
 			}
 		});
