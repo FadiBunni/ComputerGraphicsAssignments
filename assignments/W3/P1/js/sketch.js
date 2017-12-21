@@ -4,7 +4,6 @@ var gl;
 var numVertices  = 24;
 
 var points = [];
-var colors = [];
 
 var vertices = [
 vec4(0, 0, 1, 1.0),//0
@@ -47,8 +46,6 @@ var init = function(){
     gl.viewport( 0, 0, canvas.width, canvas.height );
     gl.clearColor(0.3921, 0.5843, 0.9294, 1.0);
 
-
-
     var program = initShaders( gl, "vertex-shader", "fragment-shader" );
     gl.useProgram( program );
 
@@ -59,7 +56,6 @@ var init = function(){
     var iBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, iBuffer);
     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint8Array(indices), gl.STATIC_DRAW);
-
 
     var vPosition = gl.getAttribLocation( program, "vPosition" );
     gl.vertexAttribPointer( vPosition, 4, gl.FLOAT, false, 0, 0 );

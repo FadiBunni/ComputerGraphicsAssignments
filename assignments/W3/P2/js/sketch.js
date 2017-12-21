@@ -1,11 +1,9 @@
-//The window.onload event is executed in misc.js file. no need to run it twice.
 var canvas;
 var gl;
 
 var numVertices  = 24;
 
 var points = [];
-var colors = [];
 
 var vertices = [
 vec4(-0.5, -0.5,  1.5, 1.0),//0
@@ -49,8 +47,8 @@ var up = vec3(0.0, 1.0, 0.0);
 
 var init = function(){
     canvas = document.getElementById( "gl_canvas" );
-        canvas.width = 512;
-        canvas.height = 512;
+    canvas.width = 512;
+    canvas.height = 512;
 
     gl = WebGLUtils.setupWebGL( canvas );
     if ( !gl ) alert( "WebGL isn't available" );
@@ -71,7 +69,6 @@ var init = function(){
     var iBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, iBuffer);
     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint8Array(indices), gl.STATIC_DRAW);
-
 
     var vPosition = gl.getAttribLocation( program, "vPosition" );
     gl.vertexAttribPointer( vPosition, 4, gl.FLOAT, false, 0, 0 );
@@ -94,18 +91,19 @@ function render()
     ctm1 = modelViewMatrix;
     ctm2 = modelViewMatrix;
 
-    var t1 = translate(vec3(-1.5, 0, 0), mat4());
     ctm1 = mult(ctm1, rotateY(-30));
-    ctm1 = mult(ctm1, t1);
+    ctm1 = mult(ctm1, translate(vec3(-1.5, 0, 0)));
+    
 
-    var t2 = translate(vec3(1.5, 0, 0), mat4());
     ctm2 = mult(ctm2, rotateY(30));
     ctm2 = mult(ctm2, rotateX(30));
     ctm2 = mult(ctm2, rotateZ(30));
-    ctm2 = mult(ctm2, t2);
+    ctm2 = mult(ctm2, translate(vec3(1.5, 0, 0)));
+    
 
     gl.uniformMatrix4fv(projectionMatrixLoc, false, flatten(projectionMatrix));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(modelViewMatrix));
+
     gl.drawElements(gl.LINES, numVertices, gl.UNSIGNED_BYTE, 0);
 
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(ctm1));
@@ -113,8 +111,6 @@ function render()
 
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(ctm2));
     gl.drawElements(gl.LINES, numVertices, gl.UNSIGNED_BYTE, 0);
-
-    requestAnimFrame(render);
 }
 
 init();

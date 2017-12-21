@@ -1,0 +1,7 @@
+We introduce the projection matrix with the perspective function in MW. Its arguments are field of view, aspect ratio, the near clipping value and the far clipping value. What the latter two does, is specify what will be visible to the camera depthwise. The projection matrix is multiplied to the model view matrix in the vertex shader.
+<br/>
+<br/>
+When rendering the cube three times, we need to apply a transformation matrix to the two cubes on the left and right side, which is done through rotations and translations. For the left cube, we rotate it around the y-axis, followed by a negative translation in the x-axis. For the right cube, we rotate it on all 3 axes, followed by a positive translation in the x-axis.
+<br/>
+<br/>
+When transforming an object, the order of which the various transformations are done, matters. In this part, what we do is to first translate the object to where we want it to be, and then apply the rotation afterwards. We then update the model view matrix to the correct transformation matrix each time we render a different cube.
