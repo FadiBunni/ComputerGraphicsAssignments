@@ -82,7 +82,7 @@ var init = function(){
 
 function render()
 {
-    gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
     eye = vec3(radius*Math.sin(phi), radius*Math.sin(theta), radius*Math.cos(phi));
     modelViewMatrix = lookAt(eye, at , up);
