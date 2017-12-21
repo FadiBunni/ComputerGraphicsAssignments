@@ -33,7 +33,7 @@ function categoryAndSubcategoryText(categoryText, subCategoryText){
 	interrupted = true;
 	var splitCategoryText = categoryText.slice(0,1) + categoryText.slice(10,11);
 	var splitSubCategoryText = subCategoryText.slice(0,1) + subCategoryText.slice(5,6);
-	
+
 	return [splitCategoryText, splitSubCategoryText];
 };
 
@@ -151,7 +151,6 @@ function readAndPrintFileContent(categoryTexts){
 										$.ajax({
 											type: 'GET',
 											url: 'assignments/' + categoryText + '/' + subCategoryText + '/js/sketch.js',
-											dataType: 'text',
 											error: function(xhr, statusText) {
 											 	$("#js_code").text("ERROR: NO CODE!");
 											 	$("#js_canvas").remove("#js_canvas");
@@ -175,6 +174,7 @@ function readAndPrintFileContent(categoryTexts){
 												script.innerHTML = msg;
 												script.id = 'js_canvas'
 												if(categoryText == "W2" && (subCategoryText == "P3" || subCategoryText == "P4")){
+													console.log("hey");
 													$("body").eval(script);
 												}else {
 													$("body").append(script);
