@@ -149,7 +149,7 @@ function initTextures(program) {
 function isPowerOf2(val) {return (val & (val - 1)) == 0;}
 
 function onReadComplete() {
-  var drawingInfo = g_objDoc.getDrawingInfo();
+    var drawingInfo = g_objDoc.getDrawingInfo();
 
     var buffers = new Object();
     buffers.vertexBuffer = initArrayBufferForLaterUse(drawingInfo.vertices, 3, gl.FLOAT)

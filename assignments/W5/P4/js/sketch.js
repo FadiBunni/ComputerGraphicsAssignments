@@ -72,6 +72,8 @@ var init = function() {
     gl.uniform1f( gl.getUniformLocation(program,
        "shininess"),materialShininess );
     waitToRender();
+
+
 }
 
 function waitToRender() {
@@ -88,7 +90,6 @@ function waitToRender() {
 
 function onReadComplete(gl, model, objDoc) {
     var drawinginfo = objDoc.getDrawingInfo();
-
 
     gl.bindBuffer(gl.ARRAY_BUFFER, model.vertexBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, drawinginfo.vertices,gl.STATIC_DRAW);
@@ -129,13 +130,12 @@ function readOBJFile(fileName, scale, reverse) {
             //console.log(request.responseText,fileName);
         }
     }
-    request.send();
+    request.send(null);
 }
 
 function onReadOBJFile(fileString, fileName, scale, reverse) {
     var objDoc = new OBJDoc(fileName);
     var result = objDoc.parse(fileString, scale, reverse);
-
     if (!result) {
         g_objDoc = null; g_drawinginfo = null;
         console.log ("OBJ file parsing error.");

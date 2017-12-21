@@ -26,8 +26,46 @@ $(function () {
 	$("#left_nav > li > p").on("click", function(){
 		subCategoryText = $(this).text();
 			readAndPrintFileContent(categoryAndSubcategoryText(categoryText,subCategoryText));
+			if(categoryAndSubcategoryText(categoryText,subCategoryText)[0] == 'W5' || categoryAndSubcategoryText(categoryText,subCategoryText)[0] == 'W8' || categoryAndSubcategoryText(categoryText,subCategoryText)[0] == 'W9'){
+				setCookie('myCookie',JSON.stringify(categoryAndSubcategoryText(categoryText,subCategoryText)),1);
+				location.reload();
+			}
 	});
+	var myCookie = getCookie('myCookie');
+		if(myCookie){
+			readAndPrintFileContent(JSON.parse(myCookie));
+			eraseCookie('myCookie');
+
+			$("html, body").animate({ scrollTop: 450 }, 1500)
+	}
 });
+
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function eraseCookie(name) {
+    setCookie(name,"",-1);
+}
 
 function categoryAndSubcategoryText(categoryText, subCategoryText){
 	interrupted = true;
@@ -40,6 +78,7 @@ function categoryAndSubcategoryText(categoryText, subCategoryText){
 function readAndPrintFileContent(categoryTexts){
 	var categoryText = categoryTexts[0];
 	var subCategoryText = categoryTexts[1];
+
 
 	//Get vertex shader text for assignment 1 to 7
 	if(categoryText != 'W8' && categoryText != 'W9'){
@@ -55,7 +94,6 @@ function readAndPrintFileContent(categoryTexts){
 		            hljs.highlightBlock(e);
 		            hljs.lineNumbersBlock(e);
 		        });
-
 
 	        	$("#vertex-shader-obj").remove();
 	        	$("#vertex-shader-ground").remove();
