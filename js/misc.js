@@ -175,8 +175,7 @@ function readAndPrintFileContent(categoryTexts){
 												script.type = 'text/javascript';
 												script.innerHTML = msg;
 												script.id = 'js_canvas'
-												if(categoryText == "W2" && (subCategoryText == "P3" || subCategoryText == "P4")){
-													console.log("hey");
+												if((categoryText == "W2" || categoryText == "W3" ) && (subCategoryText == "P2" || subCategoryText == "P3" || subCategoryText == "P4")){
 													$("body").eval(script);
 												}else {
 													$("body").append(script);
