@@ -1,0 +1,4 @@
+When making the shadow projection matrix, we can temporarily avoid z-fighting by projecting the shadows onto a plane slightly above y=-1. Later on we will come up with a more robust solution.
+<br/>
+<br/>
+The way we draw the shadows is basically just to re-draw the red quads using a different model view matrix (MVM) and a different texture. The MVM is created using our shadow projection matrix (SPM). We first translate our MVM with (-light[0], -light[1], -light[2]). We then multiply it with the SPM, and then translate it back with (light[0], light[1], light[2]).

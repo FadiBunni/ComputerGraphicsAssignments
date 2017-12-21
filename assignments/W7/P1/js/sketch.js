@@ -1,4 +1,3 @@
-//The window.onload event is executed in misc.js file. no need to run it twice.
 var canvas;
 var gl;
 var program;
@@ -8,16 +7,19 @@ var modelViewMatrix, projectionMatrix;
 var texture1, texture2;
 
 var vertices = [
+    // Main quad
     vec3(-2,-1,-1),
     vec3(2,-1,-1),
     vec3(-2,-1,-5),
     vec3(2,-1,-5),
 
+    // Left, red quad
     vec3(0.25, -0.5, -1.25),
     vec3(0.75,-0.5,-1.25),
     vec3(0.25,-0.5,-1.75),
     vec3(0.75,-0.5,-1.75),
 
+    // Right, red quad
     vec3(-1,-1,-3),
     vec3(-1,0,-3),
     vec3(-1,-1,-2.5),
@@ -54,8 +56,8 @@ var up = vec3(0.0, 1, 0.0);
 
 var init = function(){
     canvas = document.getElementById( "gl_canvas" );
-        canvas.width = 512;
-        canvas.height = 512;
+    canvas.width = 512;
+    canvas.height = 512;
     gl = WebGLUtils.setupWebGL( canvas );
     if ( !gl ) alert( "WebGL isn't available" );
 
@@ -92,34 +94,29 @@ var init = function(){
     texture1 = loadTexture1(gl);
     texture2 = loadTexture2(gl);
 
-    gl.activeTexture(gl.TEXTURE0);
-    gl.bindTexture(gl.TEXTURE_2D, texture1);
-
     gl.uniform1i(gl.getUniformLocation(program, "texture"), 0);
 
     render();
 }
 
 function loadTexture1(gl) {
+  gl.activeTexture(gl.TEXTURE0);
   var texture1 = gl.createTexture();
   gl.bindTexture(gl.TEXTURE_2D, texture1);
 
   // Preloads a blue color while image is downloading
   gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE,
                 new Uint8Array([0, 0, 255, 255]));
-
   var image = new Image();
   image.crossorigin = 'anonymous';
 
   image.onload = function() {
+    gl.activeTexture(gl.TEXTURE0);
     gl.bindTexture(gl.TEXTURE_2D, texture1);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
 
     if (isPowerOf2(image.width) && isPowerOf2(image.height)) {
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-        //gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
-        //gl.generateMipmap(gl.TEXTURE_2D);
-        //gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER,gl.LINEAR_MIPMAP_NEAREST);
     } else {
        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
@@ -135,6 +132,7 @@ function isPowerOf2(value) {
 }
 
 function loadTexture2(gl) {
+    gl.activeTexture(gl.TEXTURE1);
     var texture2 = gl.createTexture();
     gl.bindTexture(gl.TEXTURE_2D, texture2);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE,
@@ -153,11 +151,13 @@ function render(){
     gl.uniformMatrix4fv(projectionMatrixLoc, false, flatten(projectionMatrix));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(modelViewMatrix));
 
+    // MAIN IMAGE QUAD
+    gl.activeTexture(gl.TEXTURE0);
     gl.uniform1i(gl.getUniformLocation(program, "texture"), 0);
     gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
 
+    // RED QUADS
     gl.activeTexture(gl.TEXTURE1);
-    gl.bindTexture(gl.TEXTURE_2D, texture2);
     gl.uniform1i(gl.getUniformLocation(program, "texture"), 1);
     gl.drawArrays(gl.TRIANGLE_STRIP,4,4);
     gl.drawArrays(gl.TRIANGLE_STRIP,8,4);

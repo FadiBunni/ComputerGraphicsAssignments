@@ -1,0 +1,6 @@
+We define a total of 12 vertices, which forms the 3 different quads. For the texture coordinates we do the same - the quads we form with the texture coords should have a length of 1 in order to not get repeated.
+<br/>
+<br/>
+Since we draw the textures from the same program each time, we need to update the value of the texture in the shader when we switch to drawing the red quads. We also need to switch the currently active texture method.
+<br/>
+It is important to note that since the image.onLoad function is called much later in the program (somewhere during the continuous rendering), we need to set the active texture inside the onload function as well, so that it does not overlap the second texture mode.

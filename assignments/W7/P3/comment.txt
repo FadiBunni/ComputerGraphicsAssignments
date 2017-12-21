@@ -1,0 +1,11 @@
+The z-fighting is handled by introducing a negative offset in the far-plane of our projection matrix. 
+<br/>
+When using the depth test, we need to think about which objects we want to test, and how we want to test them. Whenever we draw an object, unless we explicitly mask its depth, the object will used in the depth test to come. Because of this, the most natural order in which to draw the objects will be:
+<br/>
+<br/>
+<strong>1: </strong> Ground <br/>
+<strong>2: </strong> Shadows <br/>
+<strong>3: </strong> Red Quads <br/>
+<br/>
+<br/>
+This way, we can make a depth test for the shadows with the depth function gl.GEQUAL, meaning that we draw the shadows as long as their depth are greater or equal to the ground. We do not want the quads to be part of the test however, since this would result in our shadows being on top of the quads. When we draw the quads, we need to set the depth function to gl.LESS again, so that they will be visible above the ground.
