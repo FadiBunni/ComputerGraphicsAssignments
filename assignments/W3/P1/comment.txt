@@ -1,0 +1,5 @@
+We draw the lines with the use of the drawElements function. In the element array buffer on the GPU, we store the data for the indices used to form the cube, given its 8 corners. 
+<br/>
+In this part, we have included depth testing, although it makes no difference when drawing in wireframe. What it does is to filter away overlapping pixels depthwise, so that only the pixels closest to the camera is drawn.
+<br/>
+We now introduce a model view matrix that transforms all the vertices. The matrix is built through the lookAt function in the MV-library, which takes 3 arguments. First one is the location of the camera (the eye). The second is the point in space which the camera points at. The third argument specifies which direction is up. In the vertex shader, this matrix is multiplied with all the vertices to perform the actual transformation.
