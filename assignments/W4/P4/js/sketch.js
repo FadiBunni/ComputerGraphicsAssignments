@@ -1,4 +1,3 @@
-//The window.onload event is executed in misc.js file. no need to run it twice.
 var canvas;
 var gl;
 
@@ -46,15 +45,6 @@ function triangle(a, b, c){
     pointsArray.push(b);
     pointsArray.push(c);
 
-    var t1 = subtract(b, a);
-    var t2 = subtract(c, a);
-    var normal = normalize(cross(t2, t1));
-    normal = vec4(normal);
-/*
-    normalsArray.push(normal);
-    normalsArray.push(normal);
-    normalsArray.push(normal);
-*/
     normalsArray.push(a[0], a[1], a[2], 0.0);
     normalsArray.push(b[0], b[1], b[2], 0.0);
     normalsArray.push(c[0], c[1], c[2], 0.0);
@@ -86,8 +76,8 @@ function tetrahedron(a, b, c, d, n){
 
 var init = function(){
     canvas = document.getElementById( "gl_canvas" );
-        canvas.width = 512;
-        canvas.height = 512;
+    canvas.width = 512;
+    canvas.height = 512;
         
     gl = WebGLUtils.setupWebGL( canvas );
     if ( !gl ) alert( "WebGL isn't available" );
@@ -206,7 +196,7 @@ function render(){
         gl.drawArrays( gl.TRIANGLES, i, 3 );
     }
 
-    if(interrupted) return; // ignore this line of code!
+    if(interrupted) return;
     requestAnimationFrame(render);
 }
 

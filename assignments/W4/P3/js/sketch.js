@@ -1,4 +1,3 @@
-//The window.onload event is executed in misc.js file. no need to run it twice.
 var canvas;
 var gl;
 
@@ -14,9 +13,9 @@ var vb = vec4(0.0, 0.942809, -0.333333, 1);
 var vc = vec4(-0.816497, -0.471405, -0.333333, 1);
 var vd = vec4(0.816497, -0.471405, -0.333333, 1);
 
-var lightPosition = vec4(0.0,0.0,1.0, 0.0 );
-var lightDiffuse = vec4( 1.0, 1.0, 1.0, 0.0 );
-var materialDiffuse = vec4( 1,1,1,0 );
+var lightPosition = vec4(0.0, 0.0, 1.0, 0.0);
+var lightDiffuse = vec4(0.5, 0.5, 0.5, 0.0);
+var materialDiffuse = vec4(1.0, 1.0, 1.0, 0.0);
 
 var modelViewMatrixLoc, projectionMatrixLoc;
 var modelViewMatrix, projectionMatrix;
@@ -71,8 +70,8 @@ function tetrahedron(a, b, c, d, n){
 
 var init = function(){
     canvas = document.getElementById( "gl_canvas" );
-        canvas.width = 512;
-        canvas.height = 512;
+    canvas.width = 512;
+    canvas.height = 512;
 
     gl = WebGLUtils.setupWebGL( canvas );
     if ( !gl ) alert( "WebGL isn't available" );
@@ -153,7 +152,7 @@ function render(){
         gl.drawArrays( gl.TRIANGLES, i, 3 );
     }
     
-    if(interrupted) return; // ignore this line of code!
+    if(interrupted) return;
     requestAnimFrame(render);
 }
 

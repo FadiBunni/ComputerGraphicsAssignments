@@ -14,5 +14,4 @@ void main()
     fNormal = a_Normal;
     pos = (modelViewMatrix * a_Position).xyz;
     gl_Position = projectionMatrix * modelViewMatrix * a_Position;
-
 }

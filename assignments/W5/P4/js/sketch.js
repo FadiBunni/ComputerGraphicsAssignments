@@ -1,4 +1,3 @@
-//The window.onload event is executed in misc.js file. no need to run it twice.
 var canvas;
 var gl;
 
@@ -18,7 +17,7 @@ var far = 10;
 var fov = 45;
 var aspect;
 var radius = 5.0;
-var theta  = 0; // changed from 0 to 1.6
+var theta  = 0;
 var phi    = 0.0;
 var eye;
 var at = vec3(0, 0.0, 0);
@@ -30,8 +29,8 @@ var model;
 
 var init = function() {
     canvas = document.getElementById( "gl_canvas" );
-        canvas.width = 512;
-        canvas.height = 512;
+    canvas.width = 512;
+    canvas.height = 512;
     gl = WebGLUtils.setupWebGL( canvas );
     if ( !gl ) alert( "WebGL isn't available" );
 
@@ -127,7 +126,6 @@ function readOBJFile(fileName, scale, reverse) {
     request.onreadystatechange = function() {
         if (request.readyState === 4 && request.status !== 404) {
             onReadOBJFile(request.responseText, fileName, scale, reverse);
-            //console.log(request.responseText,fileName);
         }
     }
     request.send(null);
@@ -156,8 +154,9 @@ function render(){
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(modelViewMatrix));
     gl.uniformMatrix3fv(normalMatrixLoc, false, flatten(normalM));
     gl.drawElements(gl.TRIANGLES, g_drawinginfo.indices.length, gl.UNSIGNED_SHORT, 0);
+
+    if(interrupted) return;
     window.requestAnimFrame(render);
-    initbool = false;
 }
 
 init();

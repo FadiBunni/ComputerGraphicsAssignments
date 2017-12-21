@@ -1,0 +1,39 @@
+<strong> a:</strong> <br/>
+The Phong reflection model is the equation itself. The Phong shading consist of applying that equation to every fragment in the object. The Phong reflection model is also used in the Gouraud shading, but only for the vertices instead of all fragments. 
+<br/>
+<br/>
+
+<strong> b:</strong> <br/>
+Flat shading is applied to a whole surface of a model. It is basically a Phong shading done once per surface. It is good because it requires very little processing power, but bad because it does not look realistic at all and results in very easily noticeable surface splits. 
+<br/>
+<br/>
+Gouraud shading works with only the vertices in the object. It uses the true surface normal in the calculation. Basically it applies the phong reflection model for each vertex. The good thing about gouraud shading is that it's better than flat shading and less expensive to calculate than Phong shading. It serves as a great middle ground. The cons are that specular highlights often appear in an unnatural way on rough surfaces, like our sphere when the amount of subdivisions is low. 
+<br/>
+<br/>
+Phong shading applies the phong reflection model for each pixel in the object and uses the interpolation of normals. The cons are the vast amount of processing power needed. The pros are the most realistic shading.
+<br/>
+<br/>
+
+<strong> c:</strong> <br/>
+In a point light, the light comes from a single source and spreads outwards in all directions. Examples are lamps.
+<br/>
+Directional light can be seen as a light source infinitely far away which is infinitely large. Provides a direction but no location.
+<br/>
+<br/>
+
+<strong> d:</strong> <br/>
+It absolutely does. When computing the half-vector used in the specular highlight, we need to know both the direction and location of the camera.
+<br/>
+<br/>
+
+<strong> e:</strong> <br/>
+There is no specular highlight.
+<br/>
+<br/>
+<strong> f:</strong> <br/>
+The area of the specular highlight becomes smaller, and the intensity higher.
+<br/>
+<br/>
+
+<strong> g:</strong> <br/>
+The lighting is computed in the camera space. It is important to check that everything is computed in the same space.

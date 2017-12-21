@@ -1,10 +1,8 @@
-//The window.onload event is executed in misc.js file. no need to run it twice.
 var canvas;
 var gl;
 
 var modelViewMatrixLoc, projectionMatrixLoc;
 var modelViewMatrix, projectionMatrix;
-var normalMatrix, normalMatrixLoc;
 
 var near = 3;
 var far = 10;
@@ -23,8 +21,8 @@ var model;
 
 var init = function(){
     canvas = document.getElementById( "gl_canvas" );
-        canvas.width = 512;
-        canvas.height = 512;
+    canvas.width = 512;
+    canvas.height = 512;
     gl = WebGLUtils.setupWebGL( canvas );
     if ( !gl ) alert( "WebGL isn't available" );
 
@@ -75,7 +73,6 @@ function onReadComplete(gl, model, objDoc) {
 function initVertexBuffers(gl, program) {
     var o = new Object();
     o.vertexBuffer = createEmptyArrayBuffer(gl, program, "a_Position", 3, gl.FLOAT);
-    //o.normalBuffer = createEmptyArrayBuffer(gl,program, "a_Normal" , 3, gl.FLOAT);
     o.indexBuffer = gl.createBuffer();
     return o;
 }
@@ -120,11 +117,11 @@ function render(){
     phi+= 0.01;
     projectionMatrix = perspective(fov, aspect, near, far);
 
-    var normalM = normalMatrix(modelViewMatrix, true);
     gl.uniformMatrix4fv(projectionMatrixLoc, false, flatten(projectionMatrix));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(modelViewMatrix));
-    gl.uniformMatrix3fv(normalMatrixLoc, false, flatten(normalM));
     gl.drawElements(gl.TRIANGLES, g_drawinginfo.indices.length, gl.UNSIGNED_SHORT, 0);
+
+    if(interrupted) return;
     window.requestAnimFrame(render);
 }
 init();

@@ -1,0 +1,3 @@
+The true normals are defined as simply being the first 3 coordinates of each vertex. Whenever we push a vertex to the points array, we also push a vertex to the normals array, which is also saved as buffer data for the vertex shader. We compute the normal matrix of the model view matrix by inversing the transposed matrix. This is sent to the vertex shader also.
+<br/>
+To do the actual shading of the sphere, we define a position for the vertex, a position for the light, and a diffuse product, which determines which color our sphere will have. We then do a number of computations inside the vertex shader, such as transforming the vertex normals into eye coordinates and normalizing them. The direction of the diffuse light is set to be the center of each triangle.

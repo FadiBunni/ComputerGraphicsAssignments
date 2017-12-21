@@ -1,0 +1,8 @@
+We now implement the full reflection model, which introduces a bunch of new parameters. Like before, we send them to the vertex shader where all the computation takes place.
+<br/>
+<br/>
+The ambient term is just applied directly and does not involve any further computations. The calculations for the specular term is somewhat similar to the diffuse term. However, for this we need the dot product between the vector from the surface to the eye, and the reflection vector.
+<br/>
+Since this is computationally expensive to calculate, we instead use the unit halfway vector between the position of the light and the eye position. The dot product previously mentioned can then be found as the surface normal multiplied by the halfway vector.
+<br/>
+The shininess constant determines the area and intensity of the specular light. A higher value means a smaller, more intense light.

@@ -1,0 +1,1 @@
+We start off with 4 initial vertices that specify a 3d triangle. The sphere is then created by dividing this triangle into sub-triangles, which we do recursively while counting down the number of subdivisions. More subdivisions means a smoother sphere. When the number of subdivisions reach 0, the points are all added to an array which is sent to the vertex buffer.

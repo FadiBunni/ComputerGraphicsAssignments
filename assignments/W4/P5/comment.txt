@@ -1,0 +1,6 @@
+In order to compute the lighting on a per-fragment basis, instead of in center of each surface, we move the normalization of the vectors from the vertex shader to the fragment shader. The vertex shader should then send the vertex surface normals, along with the vertex positions, to the fragment shader.
+<br/>
+<br/>
+<strong>Best method for simulating highlight: </strong>
+<br/>
+Phong shading is the best method for simulating realistic highlight. Since the lightning calculation is done for each pixel/fragment in the phong shading, the specular highlight provides a more realistic look at the cost of more expensive calculations. The Gouraud shading requires far less processing power however. What happens with specular highlighting in the case of Gouraud shading is that the calculation is done for each vertex, meaning that the highlight will fade in and out across neighboring portions of the respective object when rotating it.

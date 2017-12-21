@@ -16,7 +16,8 @@ main()
 
     vec3 pos = (modelViewMatrix * vPosition).xyz;
 
-    vec3 L;
+    vec3 light = (modelViewMatrix * lightPosition).xyz;
+    vec3 L = lightPosition.w == 0.0 ? normalize(light) : normalize(light - pos);
 
     if(lightPosition.w == 0.0) L = normalize(lightPosition.xyz);
     else L = normalize( lightPosition.xyz - pos);
@@ -31,6 +32,5 @@ main()
 
     fColor = diffuse;
     fColor.a = 1.0;
-    //fColor = vec4((1.0+vPosition.xyz)/2.0, 1.0);
 
 }

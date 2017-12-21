@@ -1,0 +1,1 @@
+Through the WebGL programming guide on campusnet and the OBJParser file, loading in an obj-file is fairly straightforward, and there is not really anything to comment on here.
