@@ -1,0 +1,4 @@
+We add a new empty index array "circles", and add all the new things, such as a circle mode, whether or not the first vertex in the circle has been created, etc. 
+<br/>
+<br/>
+When clicking the second time to draw the circle, we need to remember the previous mouse click, to use it as center of the circle. The radius is then calculated as the distance from the current to the previous click. Only the center of the circle is kept as an index, whereas all the vertices are sent to the buffer. The amount of the vertices on the circumference are kept track of, so that when we draw the circle, a gl.TRIANGLE_FAN is just called on that amount.

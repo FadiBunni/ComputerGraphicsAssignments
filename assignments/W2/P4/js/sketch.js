@@ -1,4 +1,3 @@
-//The window.onload event is executed in misc.js file. no need to run it twice.
 var program;
 var gl;
 var canvas;
@@ -35,8 +34,8 @@ var circles = [0];
 var init = function(){
 
     canvas = document.getElementById("gl_canvas");
-        canvas.width = 512;
-        canvas.height = 512;
+    canvas.width = 512;
+    canvas.height = 512;
     gl = WebGLUtils.setupWebGL(canvas);
     if (!gl) alert("WebGL isn’t available");
 
@@ -159,6 +158,7 @@ function makeBuffer() {
 
 function render() {
     gl.clear(gl.COLOR_BUFFER_BIT );
+
     for(var i = 0; i < points.length; i++) {
         gl.drawArrays(gl.POINTS, points[i], 1);
     }
@@ -166,11 +166,10 @@ function render() {
         gl.drawArrays(gl.TRIANGLES, triangles[i],3)
     }
     for(var i = 0; i < circles.length; i++) {
-        gl.drawArrays(gl.TRIANGLE_FAN, circles[i],pointsInCircle+2)
+        gl.drawArrays(gl.TRIANGLE_FAN, circles[i], pointsInCircle+2)
     }
-    window.requestAnimFrame(render,canvas);
 
-    //TODO - The last drawm OBJ should be on top of everything else
+    window.requestAnimFrame(render,canvas);
 }
 
 init();

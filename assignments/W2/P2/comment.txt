@@ -1,0 +1,4 @@
+We make an array with the same size as the select element, where we keep track of the index of our color array by updating it whenever the element is clicked. By having an onClick function on the clear button, we can clear the color of the canvas so it matches the selected color.
+<br/>
+<br/>
+All of our buffering code is put in a function which is called every time we clear the canvas.

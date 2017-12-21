@@ -1,0 +1,4 @@
+Our mousedown event check whether it is a triangle that has to be drawn next, or a point. This is done by keeping track of the drawing mode. If in triangle drawing mode,  the amount of points set prior to a triangle is also kept track of, so that the first two vertices in the triangle are drawn as points. 
+<br/>
+<br/>
+As before, we simply add a vertex to the vertex buffer data each time we click the canvas. The indices of the vertices used when drawing points and triangles are stored in two different arrays which are initially empty. In the render function we draw the arrays with the two options gl.POINTS and gl.TRIANGLES, where we for each of them, loop through the length of the respective array.

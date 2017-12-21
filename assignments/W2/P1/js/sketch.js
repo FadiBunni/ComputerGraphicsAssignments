@@ -17,7 +17,6 @@ var init = function(){
 
     canvas.addEventListener("mousedown", function(event){
         var rect = event.target.getBoundingClientRect();
-        gl.bindBuffer( gl.ARRAY_BUFFER, vBuffer );
         var t = vec2(2*(event.clientX-rect.left)/canvas.width-1,
            2*(canvas.height-event.clientY+rect.top)/canvas.height-1);
         gl.bufferSubData(gl.ARRAY_BUFFER, 8*index, flatten(t));
