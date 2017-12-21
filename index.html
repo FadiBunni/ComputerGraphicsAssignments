@@ -24,8 +24,6 @@
 	      <h3>Read me!</h3>
 	      <p>In the Javascript code the "window.onload" is executed in misc.js file, so we dont need to add it multiple times</p>
 	      <p>Each subparts that have a moving object, also has an code added line that interrupts the render function, so that the render function <br> does not get executed multiple times when loading new parts, this exstra line of code should be completely ignored.</p>
-	      <h3>BUGS!!</h3>
-	      <p>OBJ files only loads properly the first time, you must reload the page second time! This is seen in worksheet 5, 8 and 9.  </p>
 	      <hr></hr>
 			<h3><a href="project_rocket/project.html">Click here to see our project!</a></h3>
 	      <hr></hr>
@@ -129,12 +127,18 @@
 		      	<p id="comments"></p>
 		    </div>
 		    <div class="col">
-		      	<p>Vertex shader</p>
+		      	<p>Vertex shader(s)</p>
 		      	<pre><code id="vertex_shader" class="glsl"></code></pre>
+		      	<pre><code id="vertex_shader_ground" class="glsl"></code></pre>
+		      	<pre><code id="vertex_shader_obj" class="glsl"></code></pre>
+		      	<pre><code id="vertex_shader_shadow" class="glsl"></code></pre>
 		    </div>
 		    <div class="col">
-		      	<p>Fragment shader</p>
+		      	<p>Fragment shader(s)</p>
 		      	<pre><code id="fragment_shader" class="glsl"></code></pre>
+		      	<pre><code id="fragment_shader_ground" class="glsl"></code></pre>
+		      	<pre><code id="fragment_shader_obj" class="glsl"></code></pre>
+		      	<pre><code id="fragment_shader_shadow" class="glsl"></code></pre>
 		    </div>
 		    <div class="col">
 		      	<p>Html-code</p>

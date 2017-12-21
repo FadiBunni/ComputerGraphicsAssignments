@@ -93,13 +93,11 @@ function render()
 
     ctm1 = mult(ctm1, rotateY(-30));
     ctm1 = mult(ctm1, translate(vec3(-1.5, 0, 0)));
-    
 
     ctm2 = mult(ctm2, rotateY(30));
     ctm2 = mult(ctm2, rotateX(30));
     ctm2 = mult(ctm2, rotateZ(30));
     ctm2 = mult(ctm2, translate(vec3(1.5, 0, 0)));
-    
 
     gl.uniformMatrix4fv(projectionMatrixLoc, false, flatten(projectionMatrix));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(modelViewMatrix));

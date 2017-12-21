@@ -8,8 +8,8 @@ $(function () {
 	//slider nav
 	$("#nav_wrapper > nav > ul > li").click(function(){
 		if(!$(this).find('ul').is(":visible")) {
-			$("#nav_wrapper ul ul").slideUp();
-     		$(this).find('ul').slideDown();
+			$("#nav_wrapper ul ul").slideUp("slow");
+			$(this).find('ul').slideDown("slow");
   		}
 	});
 
@@ -35,8 +35,9 @@ $(function () {
 		if(myCookie){
 			readAndPrintFileContent(JSON.parse(myCookie));
 			eraseCookie('myCookie');
-
 			$("html, body").animate({ scrollTop: 450 }, 1500)
+			console.log(JSON.parse(myCookie)[0].substring(1,2)+1);
+			$("#nav_wrapper > nav > ul > li:nth-child("+(parseInt(JSON.parse(myCookie)[0].substring(1,2))+1)+")").find('ul').slideDown("slow");
 	}
 });
 
@@ -237,11 +238,11 @@ function readAndPrintFileContent(categoryTexts){
 			type: 'GET',
 			url: 'assignments/' + categoryText + '/' + subCategoryText + '/js/shaders/vshaderground.glsl',
 			error: function(xhr, statusText) {
-			 	$("#vertex_shader").text("ERROR: NO CODE!");
+			 	$("#vertex_shader_ground").text("ERROR: NO CODE!");
 			 },
 			success: function(msg){
-			 	$("#vertex_shader").text(msg);
-			    $('#vertex_shader').each(function(i, e) {
+			 	$("#vertex_shader_ground").text(msg);
+			    $("#vertex_shader_ground").each(function(i, e) {
 		            hljs.highlightBlock(e);
 		            hljs.lineNumbersBlock(e);
 		        });
@@ -265,11 +266,11 @@ function readAndPrintFileContent(categoryTexts){
 					type: 'GET',
 					url: 'assignments/' + categoryText + '/' + subCategoryText + '/js/shaders/fshaderground.glsl',
 					error: function(xhr, statusText) {
-					 	$("#fragment_shader").text("ERROR: NO CODE!");
+					 	$("#fragment_shader_ground").text("ERROR: NO CODE!");
 					 },
 					success: function(msg){
-					 	$("#fragment_shader").text(msg);
-					    $('#fragment_shader').each(function(i, e) {
+					 	$("#fragment_shader_ground").text(msg);
+					    $("#fragment_shader_ground").each(function(i, e) {
 				            hljs.highlightBlock(e);
 				            hljs.lineNumbersBlock(e);
 				        });
@@ -292,11 +293,11 @@ function readAndPrintFileContent(categoryTexts){
 							type: 'GET',
 							url: 'assignments/' + categoryText + '/' + subCategoryText + '/js/shaders/vshaderobj.glsl',
 							error: function(xhr, statusText) {
-							 	$("#vertex_shader").text("ERROR: NO CODE!");
+							 	$("#vertex_shader_obj").text("ERROR: NO CODE!");
 							 },
 							success: function(msg){
-							 	$("#vertex_shader").append(msg);
-							    $('#vertex_shader').each(function(i, e) {
+							 	$("#vertex_shader_obj").append(msg);
+							    $("#vertex_shader_obj").each(function(i, e) {
 						            hljs.highlightBlock(e);
 						            hljs.lineNumbersBlock(e);
 						        });
@@ -318,11 +319,11 @@ function readAndPrintFileContent(categoryTexts){
 									type: 'GET',
 									url: 'assignments/' + categoryText + '/' + subCategoryText + '/js/shaders/fshaderobj.glsl',
 									error: function(xhr, statusText) {
-									 	$("#fragment_shader").text("ERROR: NO CODE!");
+									 	$("#fragment_shader_obj").text("ERROR: NO CODE!");
 									 },
 									success: function(msg){
-									 	$("#fragment_shader").append(msg);
-									    $('#fragment_shader').each(function(i, e) {
+									 	$("#fragment_shader_obj").append(msg);
+									    $("#fragment_shader_obj").each(function(i, e) {
 								            hljs.highlightBlock(e);
 								            hljs.lineNumbersBlock(e);
 								        });
@@ -343,11 +344,11 @@ function readAndPrintFileContent(categoryTexts){
 											type: 'GET',
 											url: 'assignments/' + categoryText + '/' + subCategoryText + '/js/shaders/vshadershadow.glsl',
 											error: function(xhr, statusText) {
-												if(categoryText == "W8" && subCategoryText == 'P2') $("#vertex_shader").text("ERROR: NO CODE!");
+												if(categoryText == "W8" && subCategoryText == 'P2') $("#vertex_shader_shadow").text("ERROR: NO CODE!");
 											 },
 											success: function(msg){
-											 	$("#vertex_shader").append(msg);
-											    $('#vertex_shader').each(function(i, e) {
+											 	$("#vertex_shader_shadow").append(msg);
+											    $("#vertex_shader_shadow").each(function(i, e) {
 										            hljs.highlightBlock(e);
 										            hljs.lineNumbersBlock(e);
 										        });
@@ -368,11 +369,11 @@ function readAndPrintFileContent(categoryTexts){
 													type: 'GET',
 													url: 'assignments/' + categoryText + '/' + subCategoryText + '/js/shaders/fshadershadow.glsl',
 													error: function(xhr, statusText) {
-													 	if(categoryText == "W8" && subCategoryText == 'P2') $("#fragment_shader").text("ERROR: NO CODE!");
+													 	if(categoryText == "W8" && subCategoryText == 'P2') $("#fragment_shader_shadow").text("ERROR: NO CODE!");
 													 },
 													success: function(msg){
-													 	$("#fragment_shader").append(msg);
-													    $('#fragment_shader').each(function(i, e) {
+													 	$("#fragment_shader_shadow").append(msg);
+													    $('#fragment_shader_shadow').each(function(i, e) {
 												            hljs.highlightBlock(e);
 												            hljs.lineNumbersBlock(e);
 												        });
