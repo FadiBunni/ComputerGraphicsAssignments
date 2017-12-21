@@ -36,8 +36,7 @@ $(function () {
 			readAndPrintFileContent(JSON.parse(myCookie));
 			eraseCookie('myCookie');
 			$("html, body").animate({ scrollTop: 450 }, 1500)
-			console.log(JSON.parse(myCookie)[0].substring(1,2)+1);
-			$("#nav_wrapper > nav > ul > li:nth-child("+(parseInt(JSON.parse(myCookie)[0].substring(1,2))+1)+")").find('ul').slideDown("slow");
+			//$("#nav_wrapper > nav > ul > li:nth-child("+(parseInt(JSON.parse(myCookie)[0].substring(1,2))+1)+")").find('ul').slideDown("slow");
 	}
 });
 
@@ -96,6 +95,13 @@ function readAndPrintFileContent(categoryTexts){
 		            hljs.lineNumbersBlock(e);
 		        });
 
+		        //tags
+		        $("#vertex_shader_ground").empty().hide();
+		        $("#vertex_shader_obj").empty().hide();
+		        $("#vertex_shader_shadow").empty().hide();
+
+
+		        //scripts
 	        	$("#vertex-shader-obj").remove();
 	        	$("#vertex-shader-ground").remove();
 	        	$("#vertex-shader-shadow").remove();
@@ -127,6 +133,11 @@ function readAndPrintFileContent(categoryTexts){
 				            hljs.highlightBlock(e);
 				            hljs.lineNumbersBlock(e);
 				        });
+
+				        //tags
+				        $("#fragment_shader_ground").empty().hide();
+				        $("#fragment_shader_obj").empty().hide();
+				        $("#fragment_shader_shadow").empty().hide();
 
 				        $("#fragment-shader-obj").remove();
 		        		$("#fragment-shader-ground").remove();
@@ -196,6 +207,7 @@ function readAndPrintFileContent(categoryTexts){
 											error: function(xhr, statusText) {
 											 	$("#js_code").text("ERROR: NO CODE!");
 											 	$("#js_canvas").remove("#js_canvas");
+											 	$(".body").empty();
 											},
 											success: function(msg){
 												//highlight the javascript code
