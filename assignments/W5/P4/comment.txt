@@ -1,0 +1,1 @@
+We obtain the vertex normals directly through the object file. In the parser, whenever the keyword "vn" occurs, the vector is pushed to an array of normals. The polygon is defined as a list of faces which contain vertex indices and vertex normal indices. More faces means a smoother triangle mesh.

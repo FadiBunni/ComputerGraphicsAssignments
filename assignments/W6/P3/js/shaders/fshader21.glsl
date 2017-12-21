@@ -9,7 +9,6 @@ varying vec3 pos;
 varying vec4 fNormal;
 uniform sampler2D texture;
 
-
 const float PI = 3.1415926535897932384626433832795;
 
 void main()
@@ -27,11 +26,9 @@ void main()
     fColor = ambient + diffuse;
     fColor.a = 1.0;
 
-
     vec2 texCoord;
     texCoord.x = 0.5 - atan(normal.z, normal.x) * (1.0/(2.0*PI));
     texCoord.y = 0.5 - asin(normal.y) * (1.0/PI);
 
     gl_FragColor = fColor * texture2D(texture, texCoord);
-
 }

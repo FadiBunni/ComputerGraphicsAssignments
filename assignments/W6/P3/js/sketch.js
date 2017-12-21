@@ -1,17 +1,15 @@
-//The window.onload event is executed in misc.js file. no need to run it twice.
 var canvas;
 var gl;
 
 var numTimesToSubdivide = 4;
 var index = 0;
 var pointsArray = [];
-var normalsArray=[];
+var normalsArray = [];
 
 var va = vec4(0.0, 0.0, 1.0, 1);
 var vb = vec4(0.0, 0.942809, -0.333333, 1);
 var vc = vec4(-0.816497, -0.471405, -0.333333, 1);
 var vd = vec4(0.816497, -0.471405, -0.333333, 1);
-//var texCoordsArray = [];
 
 var lightPosition = vec4(0.0,0.0,1.0, 0.0 );
 var light = vec4(1,1,1,0);
@@ -70,8 +68,8 @@ function tetrahedron(a, b, c, d, n){
 
 var init = function(){
     canvas = document.getElementById( "gl_canvas" );
-        canvas.width = 512;
-        canvas.height = 512;
+    canvas.width = 512;
+    canvas.height = 512;
     gl = WebGLUtils.setupWebGL( canvas );
     if ( !gl ) alert( "WebGL isn't available" );
 
@@ -140,10 +138,8 @@ function loadTexture(gl) {
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
 
     if (isPowerOf2(image.width) && isPowerOf2(image.height)) {
-       //gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
        gl.generateMipmap(gl.TEXTURE_2D);
-        //gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
-        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER,gl.LINEAR_MIPMAP_NEAREST);
+       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER,gl.LINEAR_MIPMAP_NEAREST);
     } else {
        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
@@ -151,7 +147,6 @@ function loadTexture(gl) {
     }
   };
   image.src = "assignments/W6/P3/js/earth.jpg";
-
   return texture;
 }
 
@@ -179,7 +174,7 @@ function render(){
         gl.drawArrays( gl.TRIANGLES, i, 3 );
     }
     
-    if(interrupted) return; // ignore this line of code!
+    if(interrupted) return;
     requestAnimFrame(render);
 }
 

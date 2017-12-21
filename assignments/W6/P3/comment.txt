@@ -1,0 +1,13 @@
+When loading in an image as a texture, it might be smart to set the texture to something temporary, while waiting for the image to download. This can be done by preloading a single color, in the same way as with the checkerboard. In the onLoad function of the image, we then overwrite that function call with the image data. <br/>
+<br/>
+The texture coordinates are calculated from the surface normals like follows: <br/>
+<strong>texCoord.x = 0.5-atan(normal.z, normal.x) * (1.0/(2.0*PI)); <br/>
+texCoord.y = 0.5 - asin(normal.y) * (1.0/PI); </strong> <br/>
+Here, PI is defined as a const float in the top of the shader code. <br/>
+What this transformation accomplishes is that the map of the earth is wrapped around the sphere. <br/>
+<br/>
+<strong> Choice of filtering option: </strong> <br/>
+When using linear filtering, minification issues are very apparent, mostly in mountain areas. By using a mip-map, this is solved. It comes with the price of bad resolution however. This can be fixed by using the following parameter for the texture filtering: <br/>
+gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_NEAREST);
+<br/>
+This applies point sampling using linear filtering between mipmaps.

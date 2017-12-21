@@ -71,8 +71,6 @@ var init = function() {
     gl.uniform1f( gl.getUniformLocation(program,
        "shininess"),materialShininess );
     waitToRender();
-
-
 }
 
 function waitToRender() {
@@ -128,12 +126,13 @@ function readOBJFile(fileName, scale, reverse) {
             onReadOBJFile(request.responseText, fileName, scale, reverse);
         }
     }
-    request.send(null);
+    request.send();
 }
 
 function onReadOBJFile(fileString, fileName, scale, reverse) {
     var objDoc = new OBJDoc(fileName);
     var result = objDoc.parse(fileString, scale, reverse);
+
     if (!result) {
         g_objDoc = null; g_drawinginfo = null;
         console.log ("OBJ file parsing error.");
@@ -149,10 +148,12 @@ function render(){
     phi+= 0.01;
     projectionMatrix = perspective(fov, aspect, near, far);
 
+
     var normalM = normalMatrix(modelViewMatrix, true);
     gl.uniformMatrix4fv(projectionMatrixLoc, false, flatten(projectionMatrix));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(modelViewMatrix));
     gl.uniformMatrix3fv(normalMatrixLoc, false, flatten(normalM));
+
     gl.drawElements(gl.TRIANGLES, g_drawinginfo.indices.length, gl.UNSIGNED_SHORT, 0);
 
     if(interrupted) return;

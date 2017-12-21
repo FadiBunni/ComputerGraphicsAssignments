@@ -1,4 +1,3 @@
-//The window.onload event is executed in misc.js file. no need to run it twice.
 var canvas;
 var gl;
 
@@ -52,8 +51,8 @@ var up = vec3(0.0, 1.0, 0.0);
 
 var init = function(){
     canvas = document.getElementById("gl_canvas");
-        canvas.width = 512;
-        canvas.height = 512;
+    canvas.width = 512;
+    canvas.height = 512;
     gl = WebGLUtils.setupWebGL( canvas );
     if ( !gl ) alert( "WebGL isn't available" );
 
@@ -88,8 +87,6 @@ var init = function(){
     projectionMatrixLoc = gl.getUniformLocation(program, "projectionMatrix");
     configureTexture();
 
-    //gl.activeTexture(gl.TEXTURE0); // Needed??
-    //gl.bindTexture(gl.TEXTURE_2D, texture); // Needed??
     gl.uniform1i(gl.getUniformLocation(program, "texture"), 0);
 
     var m = document.getElementById("selectTexWrap");
@@ -111,7 +108,6 @@ function configureTexture() {
     var texture = gl.createTexture();
     gl.bindTexture(gl.TEXTURE_2D, texture);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, texSize, texSize, 0, gl.RGBA, gl.UNSIGNED_BYTE, myTexels);
-    console.log(texSize);
     if(texWrapIndex == 0) {
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
@@ -119,6 +115,7 @@ function configureTexture() {
     else {
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
     }
+    
     if(texFilterIndex == 0) {
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);

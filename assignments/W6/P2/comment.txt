@@ -1,0 +1,9 @@
+In this part, we add the various texture modes through the html-element "select". Whenever it is pressed, we update an index in our JS-script that decides which texture mode to use. 
+<br/>
+<br/>
+<strong> Explanation of different filtering modes: </strong><br/>
+Mapping texture coordinates to an array of texels does not come without problems. Often minification and magnification issues occur, which is when the texel is smaller or larger than one pixel. This brings a rough look to all edges of what is being drawn.
+<br/>
+One way of fixing the magnification issue is by introducing linear filtering which takes the weighted average of nearby texels. 
+<br/>
+A way of dealing with the minification problem is by using mip-mapping, which reduces the resolution of the texel array until it is the size of a pixel.

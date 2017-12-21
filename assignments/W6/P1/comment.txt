@@ -1,0 +1,4 @@
+When defining the vertices and texture coordinates, the ordering matters. If entering the vertices in the order given in the assignment, the result is not a square, but a triangle instead, so the order of the last two vertices should be swapped. 
+<br/>
+<br/>
+The texture coordinates are buffered and their location is sent to the vertex buffer, similar to the vertices. We need to set a couple of values and parameters for the drawing of the texture as well. The "myTexels" array stores color codes for the texture, and is set through the "setImage2D" webGL function. For both magnification and minification cases we pass the parameter gl.NEAREST, which means that we use the value of the texel closest to the rasterizer texture coordinate output.
