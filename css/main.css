@@ -30,11 +30,11 @@ a {
 #nav_wrapper > nav > ul > li {
 	color:black;
 	padding-top: 0px;
-	width: 550px;
+	width: 450px;
 }
 
 #nav_wrapper > nav > ul > li > p{
-	font-size: 20px;
+	font-size: 16px;
 	background: lightgray;
 }
 
@@ -47,12 +47,12 @@ a {
 	padding-top: 0px;
 	padding-bottom: 0px;
 	padding: 0;
-	width: 310px;
+	width: 300px;
 
 }
 
 #nav_wrapper > nav > ul > li > ul > li > p{
-	font-size: 16px;
+	font-size: 15px;
 	background: lightgray;
 	margin: 10px;
 }
@@ -91,7 +91,7 @@ td.hljs-ln-code {
 }
 
 #gl_canvas {
-	margin-left: 0px;
+	margin-left: 50px;
 }
 
 @media screen and (min-width: 1500px) {
