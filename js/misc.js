@@ -132,6 +132,9 @@ function readAndPrintFileContent(categoryTexts){
 									type: 'GET',
 									url: 'assignments/' + categoryText + '/' + subCategoryText + '/comment.txt',
 									error: function(xhr, statusText) {
+										$('#comments').each(function(i, e) {
+								            hljs.highlightBlock(e)
+								        });
 									 	$("#comments").text("Couldn't find any comment for this assignment.");
 									},
 									success: function(msg){
@@ -165,7 +168,6 @@ function readAndPrintFileContent(categoryTexts){
 
 										            hljs.lineNumbersBlock(e);
 										        });
-
 											    //first remove the sketch.js script and canvas, if they exists
 											    $("#js_canvas").remove(script);
 											    //create the script that manipulates the canvas.
