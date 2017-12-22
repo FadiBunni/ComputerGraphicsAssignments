@@ -243,9 +243,6 @@ function readAndPrintFileContent(categoryTexts){
 			}
 		});
 	}else {
-
-		/// TODO - add a script that makes "<pre><code id="vertex_shader" class="glsl"></code></pre>" for allfragment and vertex shaders.
-
 		//Get vertex shader and fragment shader text for specifically assignment 8
 		$.ajax({
 			type: 'GET',
