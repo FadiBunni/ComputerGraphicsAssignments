@@ -517,8 +517,6 @@ function render()
     var modelViewMatrixMirror = mult(modelViewMatrix, reflectionMatrix);
     var modelViewMatrixMirror_obj = mult(modelViewMatrixMirror, obj_final_transform_mat);
 
-    var modelViewMatrixMirror_ground = modelViewMatrixMirror;
-
     /* Oblique near-clipping - not implemented since it works poorly with rotating polygonal objects
 
     var clipplane = vec4(0, 0, 1, -(objTranslateZ-0.85)); //translate - offset
@@ -554,7 +552,7 @@ function render()
 
     // DRAW GROUND REFLECTION ONLY IF STENCIL TEST PASSES
     gl.stencilFunc(gl.LEQUAL, 1, 0xFF);
-    drawGround(groundProgram, modelViewMatrixMirror_ground, projectionMatrix,
+    drawGround(groundProgram, modelViewMatrixMirror, projectionMatrix,
                modelViewMatrixLight, projectionMatrixLight, false);
 
     // DRAW ROCKET REFLECTION ONLY WHEN BOTH DEPTH AND STENCIL TEST PASSES
