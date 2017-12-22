@@ -5,7 +5,5 @@ uniform vec4 fColor;
 
 void main()
 {
-
     gl_FragColor = fColor * texture2D(texture, fTexCoord);
-
 }

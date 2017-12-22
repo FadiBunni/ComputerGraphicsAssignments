@@ -1,4 +1,3 @@
-//The window.onload event is executed in misc.js file. no need to run it twice.
 var canvas;
 var gl;
 var program;
@@ -54,17 +53,17 @@ var up = vec3(0.0, 1, 0.0);
 
 var light = vec3(0,2,-2);
 var shadowPlane = -1;
-var m = mat4(); // Shadow projection matrix initially an identity matrix
+var m = mat4(); // Shadow projection matrix, initially an identity matrix (With [3][3] being 0)
 m[3][3] = 0.0;
-m[3][1] = -1.0/(light[1]-(shadowPlane+0.01));
+m[3][1] = 1.0/-(light[1]-(shadowPlane+0.01));
 
 var thetaLight = 0.0;
 
 var init = function(){
     canvas = document.getElementById( "gl_canvas" );
-        canvas.width = 512;
-        canvas.height = 512;
-    gl = WebGLUtils.setupWebGL( canvas );
+    canvas.width = 512;
+    canvas.height = 512;
+    gl = WebGLUtils.setupWebGL(canvas);
     if ( !gl ) alert( "WebGL isn't available" );
 
     gl.viewport( 0, 0, canvas.width, canvas.height );
@@ -72,11 +71,9 @@ var init = function(){
     gl.clearColor(0.3921, 0.5843, 0.9294, 1.0);
 
     gl.enable(gl.DEPTH_TEST);
-    gl.enable(gl.CULL_FACE);
-    gl.cullFace(gl.BACK);
 
     program = initShaders( gl, "vertex-shader", "fragment-shader" );
-    gl.useProgram( program );
+    gl.useProgram(program);
 
     var vBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, vBuffer);
@@ -98,15 +95,17 @@ var init = function(){
     projectionMatrixLoc = gl.getUniformLocation(program, "projectionMatrix");
 
     texture1 = loadTexture1(gl);
+
     var red = new Uint8Array([255,0,0,255]);
     var black = new Uint8Array([0,0,0,255]);
-    texture2 = loadTexture2(gl,black);
-    texture3 = loadTexture2(gl,red);
-
+    texture2 = loadTexture2(gl,red, gl.TEXTURE1);
+    texture3 = loadTexture2(gl,black, gl.TEXTURE2);
+    
     render();
 }
 
 function loadTexture1(gl) {
+  gl.activeTexture(gl.TEXTURE0);
   var texture1 = gl.createTexture();
   gl.bindTexture(gl.TEXTURE_2D, texture1);
 
@@ -117,14 +116,12 @@ function loadTexture1(gl) {
   var image = new Image();
   image.crossorigin = 'anonymous';
   image.onload = function() {
+    gl.activeTexture(gl.TEXTURE0);
     gl.bindTexture(gl.TEXTURE_2D, texture1);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
 
     if (isPowerOf2(image.width) && isPowerOf2(image.height)) {
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-        //gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
-        //gl.generateMipmap(gl.TEXTURE_2D);
-        //gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER,gl.LINEAR_MIPMAP_NEAREST);
     } else {
        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
@@ -137,18 +134,18 @@ function loadTexture1(gl) {
 
 function isPowerOf2(val) {return (val & (val - 1)) == 0;}
 
-function loadTexture2(gl, color) {
-    var texture2 = gl.createTexture();
-    gl.bindTexture(gl.TEXTURE_2D, texture2);
+function loadTexture2(gl, color, mode) {
+    gl.activeTexture(mode);
+    var texture = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, texture);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, color);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-    return texture2;
+    return texture;
 }
 
 function render(){
     gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-    //eye = vec3(radius*Math.sin(phi), radius*Math.sin(theta), radius*Math.cos(phi));
     eye = vec3(0,2,2);
     modelViewMatrix = lookAt(eye, at , up);
     projectionMatrix = perspective(fov, aspect, near, far);
@@ -163,27 +160,25 @@ function render(){
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(modelViewMatrix));
 
     gl.activeTexture(gl.TEXTURE0);
-    gl.bindTexture(gl.TEXTURE_2D, texture1);
     gl.uniform1i(gl.getUniformLocation(program, "texture"), 0);
     gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
 
-    gl.activeTexture(gl.TEXTURE2);
-    gl.bindTexture(gl.TEXTURE_2D, texture3);
-    gl.uniform1i(gl.getUniformLocation(program, "texture"), 2);
+    gl.activeTexture(gl.TEXTURE1);
+    gl.uniform1i(gl.getUniformLocation(program, "texture"), 1);
     gl.drawArrays(gl.TRIANGLE_STRIP,4,4);
     gl.drawArrays(gl.TRIANGLE_STRIP,8,4);
 
-    // model-view matrix for shadow then render
+    // model-view matrix for shadow, then render
     modelViewMatrix = mult(modelViewMatrix, translate(light[0], light[1], light[2]));
     modelViewMatrix = mult(modelViewMatrix, m);
     modelViewMatrix = mult(modelViewMatrix, translate(-light[0], -light[1], -light[2]));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(modelViewMatrix));
-    gl.activeTexture(gl.TEXTURE1);
-    gl.bindTexture(gl.TEXTURE_2D, texture2);
-    gl.uniform1i(gl.getUniformLocation(program, "texture"), 1);
+
+    gl.activeTexture(gl.TEXTURE2);
+    gl.uniform1i(gl.getUniformLocation(program, "texture"), 2);
     gl.drawArrays(gl.TRIANGLE_STRIP,4,4);
     gl.drawArrays(gl.TRIANGLE_STRIP,8,4);
-    
+
     if(!interrupted) requestAnimFrame(render);
 }
 

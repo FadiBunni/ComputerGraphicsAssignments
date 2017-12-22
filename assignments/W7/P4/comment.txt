@@ -1,0 +1,1 @@
+When applying our uniform visilibity variable for the shadow, instead of setting the alpha value 1, we set 0.7. We enable blending and set the parameters to gl.SRC_ALPHA and gl.ONE_MINUS_SRC_ALPHA.
