@@ -1,7 +1,1 @@
-Hej mit navn er fadi
-
-Jeg elsker dig
-
-<br>
-
-yay!
+Not much to say to this part. Basic setup.

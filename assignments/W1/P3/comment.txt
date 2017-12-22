@@ -1,0 +1,1 @@
+The fragment-shader color is now set using an array of colors, which spreads the colors out on the specified vertices. The color array is saved to a buffer on the GPU, similar to the vertices. In the shaders, we pass their location from the vertex shader to the fragment shader with a varying variable.

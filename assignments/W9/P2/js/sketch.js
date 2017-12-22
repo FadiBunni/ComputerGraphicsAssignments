@@ -310,18 +310,19 @@ function render(){
     gl.viewport(0, 0, canvas.width, canvas.height);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-    // DRAW TEAPOT
-    gl.useProgram(objProgram);
-    drawObj(objProgram, modelViewMatrix_obj, projectionMatrix, false);
-
     // DRAW REFLECTION
     gl.useProgram(objProgram);
     drawObj(objProgram, modelViewMatrixMirror, projectionMatrix, false);
+    gl.clear(gl.DEPTH_BUFFER_BIT);
 
     // DRAW GROUND
     gl.useProgram(groundProgram);
     drawGround(groundProgram, modelViewMatrix, projectionMatrix,
                modelViewMatrixLight, projectionMatrixLight, false);
+
+    // DRAW TEAPOT
+    gl.useProgram(objProgram);
+    drawObj(objProgram, modelViewMatrix_obj, projectionMatrix, false);
 
     // DRAW SHADOWS HERE
     gl.bindFramebuffer(gl.FRAMEBUFFER, shadowProgram.fbo);

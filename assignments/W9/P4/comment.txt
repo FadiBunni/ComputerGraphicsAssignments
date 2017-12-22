@@ -1,0 +1,1 @@
+Since we defined our reflection matrix in such an odd way previously, this will also be apparent in our near clipping.

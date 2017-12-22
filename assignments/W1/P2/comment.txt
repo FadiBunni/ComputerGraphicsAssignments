@@ -1,0 +1,4 @@
+The shaders are loaded in using the script file "initShaders". 3 2-dimensional vertices are specified in an array, which are drawn with the drawArrays-function in the webGL library. The visual canvas by default has its center in 0,0 and a width/height of 2, so that it spans from x=[-1;1] and y=[-1;1]. The vertex locations reflect this property. When drawing, only a single render call is needed since frame is static. The glClear function sets the bitplane area of the frame to the color value previously set by glClearColor.
+<br/>
+<br/>
+We get the vertex values to the GPU by putting them in a vertex buffer object. The fragment shader color is set to (0,0,0,1), which is black.

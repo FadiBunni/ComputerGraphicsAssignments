@@ -1,0 +1,1 @@
+Using gl.TRIANGLE_FAN, we can specify a circle center and then just define vertices on the circumference in an order than forms a circle. The amount of vertices defines the smoothness of the circle. In the vertex shader, the position of the vertices are changed using the "yOffSet" variable, whose value is updated in the render function.
