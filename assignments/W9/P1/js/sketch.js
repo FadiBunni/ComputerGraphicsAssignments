@@ -285,7 +285,6 @@ function render(){
     if(lightTranslate > 2*Math.PI) {lightTranslate -= 2*Math.PI;}
     lightPosition[0] = 4*Math.sin(lightTranslate);
     lightPosition[2] = -2 + 4*Math.cos(lightTranslate);
-
     objTranslate += objMotion ? 0.05 : 0.0;
   /* SET VIEWMATRICES --------------------------------------------- */
 
@@ -345,8 +344,7 @@ function render(){
                projectionMatrixLight, null, null, true);
     // DRAW TEAPOT SHADOW
     drawObj(shadowProgram, modelViewMatrixLight_obj, projectionMatrixLight, true);
-    if(interrupted) return; // ignore this line of code!
-    window.requestAnimFrame(render);
+    if(!interrupted) requestAnimFrame(render);
 }
 
 function drawObj(program, mvm, pm, drawShadow) {

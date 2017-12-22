@@ -111,7 +111,7 @@ function render(){
     for( var i=0; i<index; i+=3) {
         gl.drawArrays( gl.TRIANGLES, i, 3 );
     }
-    requestAnimFrame(render);
+    if(!interrupted) requestAnimFrame(render);
 }
 
 init();

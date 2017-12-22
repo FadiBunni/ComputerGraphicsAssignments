@@ -184,8 +184,7 @@ function render(){
     gl.drawArrays(gl.TRIANGLE_STRIP,4,4);
     gl.drawArrays(gl.TRIANGLE_STRIP,8,4);
     
-    if(interrupted) return; // ignore this line of code!
-    window.requestAnimFrame(render);
+    if(!interrupted) requestAnimFrame(render);
 }
 
 init();

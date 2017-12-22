@@ -174,8 +174,7 @@ var init = function(){
     gl.uniform1f( gl.getUniformLocation(program,
        "shininess"),materialShininess );
 
-    if(!rendered) render();
-    rendered = true;
+    render();
 }
 
 function render(){
@@ -196,8 +195,7 @@ function render(){
         gl.drawArrays( gl.TRIANGLES, i, 3 );
     }
 
-    if(interrupted) return;
-    requestAnimationFrame(render);
+    if(!interrupted) requestAnimFrame(render);
 }
 
 init();

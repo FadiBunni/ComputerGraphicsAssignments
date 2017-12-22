@@ -247,8 +247,7 @@ function render(){
     gl.useProgram(objProgram);
     drawObj(objProgram, teapotObject, modelViewMatrix_obj, projectionMatrix, false);
     
-    if(interrupted) return; // ignore this line of code!
-    window.requestAnimFrame(render);
+    if(!interrupted) requestAnimFrame(render);
 }
 
 function drawObj(program, o, mvm, pm, drawShadow) {

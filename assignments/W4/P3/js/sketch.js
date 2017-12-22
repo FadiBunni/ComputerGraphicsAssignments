@@ -131,8 +131,7 @@ var init = function(){
     gl.uniform4fv( gl.getUniformLocation(program,
        "lightPosition"),flatten(lightPosition) );
 
-    if(!rendered) render();
-    rendered = true;
+    render();
 }
 
 function render(){
@@ -156,8 +155,7 @@ function render(){
         gl.drawArrays( gl.TRIANGLES, i, 3 );
     }
     
-    if(interrupted) return;
-    requestAnimFrame(render);
+    if(!interrupted) requestAnimFrame(render);
 }
 
 init();

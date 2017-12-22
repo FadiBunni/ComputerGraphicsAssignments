@@ -156,8 +156,7 @@ function render(){
 
     gl.drawElements(gl.TRIANGLES, g_drawinginfo.indices.length, gl.UNSIGNED_SHORT, 0);
 
-    if(interrupted) return;
-    window.requestAnimFrame(render);
+    if(!interrupted) requestAnimFrame(render);
 }
 
 init();

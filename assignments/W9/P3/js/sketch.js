@@ -372,8 +372,7 @@ function render(){
                projectionMatrixLight, null, null, true);
     // DRAW TEAPOT SHADOW
     drawObj(shadowProgram, modelViewMatrixLight_obj, projectionMatrixLight, true);
-    if(interrupted) return; // ignore this line of code!
-    window.requestAnimFrame(render);
+    if(!interrupted) requestAnimFrame(render);
 }
 
 function drawObj(program, mvm, pm, drawShadow) {

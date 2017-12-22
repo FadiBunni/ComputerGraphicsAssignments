@@ -212,8 +212,7 @@ function render(){
     // DRAW TEAPOT
     drawObj(gl, objProgram, teapotObject, modelViewMatrix);
     
-    if(interrupted) return; // ignore this line of code!
-    window.requestAnimFrame(render);
+    if(!interrupted) requestAnimFrame(render);
 }
 
 function drawObj(gl, program, o, modelViewMatrix) {

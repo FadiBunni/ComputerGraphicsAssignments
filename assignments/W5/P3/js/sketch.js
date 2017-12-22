@@ -121,7 +121,6 @@ function render(){
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(modelViewMatrix));
     gl.drawElements(gl.TRIANGLES, g_drawinginfo.indices.length, gl.UNSIGNED_SHORT, 0);
 
-    if(interrupted) return;
-    window.requestAnimFrame(render);
+    if(!interrupted) requestAnimFrame(render);
 }
 init();

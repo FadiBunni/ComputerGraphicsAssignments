@@ -94,6 +94,15 @@ td.hljs-ln-code {
 	margin-left: 50px;
 }
 
+#rocket_project {
+	display: inline;
+ 	text-align:  left !important;
+}
+
+#no_app_assignments {
+	float:  right;
+}
+
 @media screen and (min-width: 1500px) {
     #gl_canvas {
         margin-left: 190px;

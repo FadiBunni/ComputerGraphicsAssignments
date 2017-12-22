@@ -5,7 +5,6 @@ var numTimesToSubdivide = 3;
 var index = 0;
 var pointsArray = [];
 var normalsArray=[];
-var rendered = false;
 
 var va = vec4(0.0, 0.0, 1.0, 1);
 var vb = vec4(0.0, 0.942809, -0.333333, 1);
@@ -175,8 +174,7 @@ var init = function(){
     gl.uniform1f( gl.getUniformLocation(program,
        "shininess"),materialShininess );
 
-    if(!rendered) render();
-    rendered = true;
+    render();
 }
 
 function render()
@@ -196,8 +194,7 @@ function render()
     for( var i=0; i<index; i+=3) {
         gl.drawArrays( gl.TRIANGLES, i, 3 );
     }
-    if(interrupted) return;
-    requestAnimFrame(render);
+    if(!interrupted) requestAnimFrame(render);
 }
 
 init();

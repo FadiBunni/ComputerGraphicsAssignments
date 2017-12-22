@@ -66,8 +66,7 @@ function render() {
     gl.uniform1f(yLoc, yOffSet);
     gl.drawArrays(gl.TRIANGLE_FAN, 0, vertices.length);
 
-    if(interrupted) return;
-    requestAnimFrame(render);
+    if(!interrupted) requestAnimFrame(render);
 }
 
 init();

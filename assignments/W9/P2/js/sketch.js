@@ -336,8 +336,6 @@ function render(){
     drawGround(groundProgram, modelViewMatrix, projectionMatrix,
                modelViewMatrixLight, projectionMatrixLight, false);
 
-
-
     // DRAW SHADOWS HERE
     gl.bindFramebuffer(gl.FRAMEBUFFER, shadowProgram.fbo);
     gl.viewport(0, 0, OFFSCREEN_WIDTH, OFFSCREEN_HEIGHT);
@@ -352,8 +350,7 @@ function render(){
                projectionMatrixLight, null, null, true);
     // DRAW TEAPOT SHADOW
     drawObj(shadowProgram, modelViewMatrixLight_obj, projectionMatrixLight, true);
-    if(interrupted) return; // ignore this line of code!
-    window.requestAnimFrame(render);
+    if(!interrupted) requestAnimFrame(render);
 }
 
 function drawObj(program, mvm, pm, drawShadow) {
