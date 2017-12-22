@@ -1,5 +1,3 @@
-"use strict";
-
 var canvas;
 var gl;
 var groundProgram, objProgram, shadowProgram, planeProgram;
