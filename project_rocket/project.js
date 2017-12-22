@@ -431,10 +431,10 @@ function moveObjects() {
   // HELPING FUNCTIONS
   function rocketOnGround() {return objTranslateY <= rocketYOffSet;}
   // KEY INPUT (ROCKET ROTATION)
-  if(keys.W) objRotateX += 1.5;
-  if(keys.S) objRotateX -= 1.5;
-  if(keys.A) objRotateZ -= 1.5;
-  if(keys.D) objRotateZ += 1.5;
+  if(keys.W) objRotateX -= 1.5;
+  if(keys.S) objRotateX += 1.5;
+  if(keys.A) objRotateZ += 1.5;
+  if(keys.D) objRotateZ -= 1.5;
   if(keys.up && zoomFactor > 0.3) zoomFactor -= 0.1;
   if(keys.down) zoomFactor += 0.1;
 
@@ -442,9 +442,9 @@ function moveObjects() {
   else isThrusting = false
 
   if(isThrusting) {
-    objRotateY += 1.5;
+    objRotateY -= 3.0;
   } else if(!rocketOnGround()) {
-    objRotateY -= 0.75;
+    objRotateY += 1.5;
   }
 
   if(Math.abs(objRotateX) > 360) objRotateX = 0;
@@ -456,10 +456,10 @@ function moveObjects() {
   objTranslateY += isThrusting ? Math.cos(radians(objRotateZ)) * 
                                  Math.cos(radians(objRotateX)) * 0.20 : 0.0;
 
-  objTranslateX -= isThrusting ? Math.sin(radians(objRotateZ)) *
+  objTranslateX += isThrusting ? Math.sin(radians(objRotateZ)) *
                                  Math.cos(radians(objRotateX)) * 0.10 : 0.0;
 
-  objTranslateZ += isThrusting ? Math.sin(radians(objRotateX)) * 0.10 : 0.0;
+  objTranslateZ -= isThrusting ? Math.sin(radians(objRotateX)) * 0.10 : 0.0;
 
   if(rocketOnGround()) objTranslateY = rocketYOffSet;
   // Flame gets bigger the longer you hold the thruster
