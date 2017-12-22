@@ -584,7 +584,7 @@ function render()
     
     drawRocket(shadowProgram, modelViewMatrixLight_obj, projectionMatrixLight, true, false);
 
-    drawMirrorFrame(objProgram, modelViewMatrixLight, projectionMatrixLight, true);
+    drawMirrorFrame(shadowProgram, modelViewMatrixLight, projectionMatrixLight, true);
 
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 
@@ -636,17 +636,27 @@ function drawMirrorFrame(program, mvm, pm, drawShadow) {
     gl.uniformMatrix3fv(program.normalMatrix, false, flatten(normalMat));
     initAttributeVariable(program.a_Normal, program.mirrorFrameBuffers.normalBuffer);
   }
-  initAttributeVariable(program.a_Position, program.mirrorFrameBuffers.vertexBuffer);
-  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, program.mirrorFrameBuffers.indexBuffer);
+  initAttributeVariable(program.a_Position, objProgram.mirrorFrameBuffers.vertexBuffer);
+  gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, objProgram.mirrorFrameBuffers.indexBuffer);
 
   gl.uniformMatrix4fv(program.projectionMatrix, false, flatten(pm));
   mvm = mult(mvm, translate(0, 0, -0.25))
   gl.uniformMatrix4fv(program.modelViewMatrix, false, flatten(mvm));
-  gl.drawElements(gl.TRIANGLES, program.mirrorFrameBuffers.numIndices, gl.UNSIGNED_SHORT, 0);
+  gl.drawElements(gl.TRIANGLES, objProgram.mirrorFrameBuffers.numIndices, gl.UNSIGNED_SHORT, 0);
 
   // DRAW THE MIRROR ITSELF
-  drawMirrorPlane(planeProgram, mvm, pm);
+  if(!drawShadow) drawMirrorPlane(planeProgram, modelViewMatrix, projectionMatrix);
+  else drawMirrorPlane(shadowProgram, modelViewMatrixLight, projectionMatrixLight);
+}
+function drawMirrorPlane(program, mvm, pm) {
+    gl.useProgram(program);
 
+    gl.uniformMatrix4fv(program.projectionMatrix, false, flatten(pm));
+    gl.uniformMatrix4fv(program.modelViewMatrix, false, flatten(mvm));
+    gl.uniform4fv(program.color, mirrorColor)
+
+    initAttributeVariable(program.a_Position, planeProgram.vertexBuffer);
+    gl.drawArrays(gl.TRIANGLE_STRIP,0,4);  
 }
 function drawRocket(program, mvm, pm, drawShadow, applyColor) {
     gl.useProgram(program);
@@ -700,14 +710,4 @@ function drawGround(program, mvm, pm, mvmL, pmL, drawShadow) {
     gl.uniformMatrix4fv(program.modelViewMatrix, false, flatten(mvm));
     initAttributeVariable(program.a_Position, groundProgram.vertexBuffer);
     gl.drawArrays(gl.TRIANGLE_STRIP,0,4);    
-}
-function drawMirrorPlane(program, mvm, pm, drawShadow) {
-    gl.useProgram(program);
-
-    gl.uniformMatrix4fv(program.projectionMatrix, false, flatten(pm));
-    gl.uniformMatrix4fv(program.modelViewMatrix, false, flatten(mvm));
-    gl.uniform4fv(program.color, mirrorColor)
-
-    initAttributeVariable(program.a_Position, program.vertexBuffer);
-    gl.drawArrays(gl.TRIANGLE_STRIP,0,4);  
 }
