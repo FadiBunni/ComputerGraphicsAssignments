@@ -311,6 +311,7 @@ function render(){
     // DRAW REFLECTION
     gl.useProgram(objProgram);
     drawObj(objProgram, modelViewMatrixMirror, projectionMatrix, false);
+    if(!interrupted) requestAnimFrame(render);
 }
 
 function drawObj(program, mvm, pm, drawShadow) {
