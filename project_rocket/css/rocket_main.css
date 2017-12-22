@@ -1,0 +1,4 @@
+#comment > p,h1{
+	z-index: 1;
+	margin-left: 60px;
+}
