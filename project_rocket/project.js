@@ -546,7 +546,7 @@ function render()
     gl.depthMask(false);
     gl.colorMask(false, false, false, false);
     // DRAW MIRROR FOR STENCIL TEST
-    drawMirrorFrame(objProgram, modelViewMatrix, projectionMatrix);
+    drawMirrorFrame(objProgram, modelViewMatrix, projectionMatrix, false);
     gl.colorMask(true,true,true,true);
     gl.depthMask(true);
     gl.stencilMask(0x00);
@@ -565,7 +565,7 @@ function render()
     gl.clear(gl.DEPTH_BUFFER_BIT | gl.STENCIL_BUFFER_BIT);
 
     // DRAW MIRROR FRAME WITH MIRROR
-    drawMirrorFrame(objProgram, modelViewMatrix, projectionMatrix);
+    drawMirrorFrame(objProgram, modelViewMatrix, projectionMatrix, false);
 
     // DRAW GROUND
     drawGround(groundProgram, modelViewMatrix, projectionMatrix,
@@ -583,6 +583,8 @@ function render()
                projectionMatrixLight, null, null, true);
     
     drawRocket(shadowProgram, modelViewMatrixLight_obj, projectionMatrixLight, true, false);
+
+    drawMirrorFrame(objProgram, modelViewMatrixLight, projectionMatrixLight, true);
 
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 
@@ -619,23 +621,22 @@ function drawFlame(program, mvm, pm, applyColor) {
   gl.drawElements(gl.TRIANGLES, program.flameBuffers.numIndices, gl.UNSIGNED_SHORT, 0);
 
 }
-function drawMirrorFrame(program, mvm, pm) {
+function drawMirrorFrame(program, mvm, pm, drawShadow) {
   gl.useProgram(program);
+  if(!drawShadow) {
+    gl.uniform4fv(program.ambientProduct, flatten(ambientProduct));
+    gl.uniform4fv(program.diffuseProduct, flatten(diffuseProduct));
+    gl.uniform4fv(program.specularProduct, flatten(specularProduct));
+    gl.uniform1f(program.shininess, shininess);
+    gl.uniform4fv(program.lightPosition, flatten(lightPosition));
 
-  gl.uniform4fv(program.ambientProduct, flatten(ambientProduct));
-  gl.uniform4fv(program.diffuseProduct, flatten(diffuseProduct));
-  gl.uniform4fv(program.specularProduct, flatten(specularProduct));
-  gl.uniform1f(program.shininess, shininess);
-  gl.uniform4fv(program.lightPosition, flatten(lightPosition));
+    initAttributeVariable(program.a_Color, program.mirrorFrameBuffers.colorBuffer);
 
-  initAttributeVariable(program.a_Color, program.mirrorFrameBuffers.colorBuffer);
-
-  var normalMat = normalMatrix(mvm, true);
-  gl.uniformMatrix3fv(program.normalMatrix, false, flatten(normalMat));
-  initAttributeVariable(program.a_Normal, program.mirrorFrameBuffers.normalBuffer);
-
+    var normalMat = normalMatrix(mvm, true);
+    gl.uniformMatrix3fv(program.normalMatrix, false, flatten(normalMat));
+    initAttributeVariable(program.a_Normal, program.mirrorFrameBuffers.normalBuffer);
+  }
   initAttributeVariable(program.a_Position, program.mirrorFrameBuffers.vertexBuffer);
-
   gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, program.mirrorFrameBuffers.indexBuffer);
 
   gl.uniformMatrix4fv(program.projectionMatrix, false, flatten(pm));
@@ -644,7 +645,7 @@ function drawMirrorFrame(program, mvm, pm) {
   gl.drawElements(gl.TRIANGLES, program.mirrorFrameBuffers.numIndices, gl.UNSIGNED_SHORT, 0);
 
   // DRAW THE MIRROR ITSELF
-  drawMirrorPlane(planeProgram, modelViewMatrix, projectionMatrix);
+  drawMirrorPlane(planeProgram, mvm, pm);
 
 }
 function drawRocket(program, mvm, pm, drawShadow, applyColor) {
@@ -700,7 +701,7 @@ function drawGround(program, mvm, pm, mvmL, pmL, drawShadow) {
     initAttributeVariable(program.a_Position, groundProgram.vertexBuffer);
     gl.drawArrays(gl.TRIANGLE_STRIP,0,4);    
 }
-function drawMirrorPlane(program, mvm, pm) {
+function drawMirrorPlane(program, mvm, pm, drawShadow) {
     gl.useProgram(program);
 
     gl.uniformMatrix4fv(program.projectionMatrix, false, flatten(pm));
