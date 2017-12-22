@@ -1,4 +1,3 @@
-//The window.onload event is executed in misc.js file. no need to run it twice.
 var canvas;
 var gl;
 var groundProgram, objProgram, shadowProgram;
@@ -48,8 +47,8 @@ var OFFSCREEN_WIDTH = 2048, OFFSCREEN_HEIGHT = 2048;
 
 var init = function(){
     canvas = document.getElementById( "gl_canvas" );
-        canvas.width = 512;
-        canvas.height = 512;
+    canvas.width = 512;
+    canvas.height = 512;
     gl = WebGLUtils.setupWebGL(canvas, {alpha: false, stencil: true });
     if ( !gl ) alert( "WebGL isn't available" );
 
@@ -272,18 +271,6 @@ function mirrorMatrix(p, v) {
     return m;
 }
 
-function modifyProjectionMatrix(clipplane, projection) {
-
-  var oblique = mult(mat4(), projection);
-  var q = vec4((Math.sign(clipplane[0]) + projection[0][2])/projection[0][0],
-  (Math.sign(clipplane[1]) + projection[1][2])/projection[1][1],-1.0,
-  (1.0 + projection[2][2])/projection[2][3]);
-  var s = 2.0/dot(clipplane, q);
-  oblique[2] = vec4(clipplane[0]*s, clipplane[1]*s,
-  clipplane[2]*s + 1.0, clipplane[3]*s);
-  return oblique;
-}
-
 function render(){
     /* ROTATE LIGHT SOURCE AND OBJECT ----------------------------- */
     if(lightMotion) lightTranslate += 0.01;
@@ -293,7 +280,6 @@ function render(){
 
     objTranslate += objMotion ? 0.05 : 0.0;
   /* SET VIEWMATRICES --------------------------------------------- */
-
     eye = vec3(0,0,1);
     var at = vec3(0.0, 0.0, -3.0);
     var up = vec3(0.0, 1.0, 0.0);
@@ -341,7 +327,7 @@ function render(){
     gl.colorMask(true,true,true,true);
 
     // DRAW REFLECTION
-    gl.stencilFunc(gl.LEQUAL, 1, 0xFF);
+    gl.stencilFunc(gl.EQUAL, 1, 0xFF);
     gl.useProgram(objProgram);
     drawObj(objProgram, modelViewMatrixMirror, projectionMatrix, false);
 

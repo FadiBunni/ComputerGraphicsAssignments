@@ -1,0 +1,4 @@
+The rotation of the quad is done in the vertex shader, where the value of theta is updated in the render function, where it is also updated in the shader.
+<br/>
+<br/>
+To draw the quad, we use the gl.TRIANGLE_STRIP option. Starting from the first drawn triangle, each following triangle is drawn using the next vertex in the array and the previous two.

@@ -1,4 +1,3 @@
-//The window.onload event is executed in misc.js file. no need to run it twice.
 var canvas;
 var gl;
 var groundProgram, objProgram, shadowProgram;
@@ -48,8 +47,8 @@ var OFFSCREEN_WIDTH = 2048, OFFSCREEN_HEIGHT = 2048;
 
 var init = function(){
     canvas = document.getElementById( "gl_canvas" );
-        canvas.width = 512;
-        canvas.height = 512;
+    canvas.width = 512;
+    canvas.height = 512;
     gl = WebGLUtils.setupWebGL(canvas, { stencil: true });
     if ( !gl ) alert( "WebGL isn't available" );
 
@@ -369,8 +368,6 @@ function render(){
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
     gl.useProgram(shadowProgram);
-    gl.activeTexture(gl.TEXTURE0);
-    gl.bindTexture(gl.TEXTURE_2D, shadowProgram.fbo.texture);
 
     // DRAW GROUND SHADOW
     drawGround(shadowProgram, modelViewMatrixLight,

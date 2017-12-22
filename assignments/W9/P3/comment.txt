@@ -1,0 +1,4 @@
+The stencil buffer works by mapping the frame into a big matrix, where pixels from the received drawing data gets a different value than the rest of the frame. We only use the stencil buffer for testing in 2D. We set the stencil function to always apply the value of 1 to incoming objects. When the stencil test succeeds, meaning that we have found our object in our frame, we replace its current value in the array with the value from our specified function, meaning 1. We then disable the depth and color mask, and "draw" our ground quad for our stencil test.
+<br/>
+<br/>
+When we now draw the teapot reflection, we set the stencil function to (=1), which means that whenever the teapot gets anywhere else than the ground (in 2D perspective), we will not draw it.
