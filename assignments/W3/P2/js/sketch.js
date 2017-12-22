@@ -91,18 +91,13 @@ function render()
     ctm1 = modelViewMatrix;
     ctm2 = modelViewMatrix;
 
-    var t1 = translate(vec3(-1.5, 0, 0), mat4());
-    //console.log(t1);
     ctm1 = mult(ctm1, rotateY(30));
-    //console.log(ctm1);
-    ctm1 = mult(ctm1, t1);
-    console.log(ctm1);
+    ctm1 = mult(ctm1, translate(vec3(-1.5, 0, 0)));
 
-    var t2 = translate(vec3(1.5, 0, 0), mat4());
     ctm2 = mult(ctm2, rotateY(-30));
     ctm2 = mult(ctm2, rotateX(-30));
     ctm2 = mult(ctm2, rotateZ(-30));
-    ctm2 = mult(ctm2, t2);
+    ctm2 = mult(ctm2, translate(vec3(1.5, 0, 0)));
 
     gl.uniformMatrix4fv(projectionMatrixLoc, false, flatten(projectionMatrix));
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(modelViewMatrix));

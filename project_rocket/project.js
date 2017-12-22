@@ -42,9 +42,7 @@ var keys = {
   S: false,
   D: false,
   up: false,
-  left: false,
   down: false,
-  right: false,
   shift: false
 };
 // LIGHT GLOBALS
@@ -224,14 +222,8 @@ function keyDown(event) {
     case 38:
       keys.up = true;
       break;
-    case 37:
-      keys.left = true;
-      break;
     case 40:
       keys.down = true;
-      break;
-    case 39:
-      keys.right = true;
       break;
     case 16:
       keys.shift = true;
@@ -256,16 +248,9 @@ function keyUp(event) {
     case 38:
       keys.up = false;
       break;
-    case 37:
-      keys.left = false;
-      break;
     case 40:
       keys.down = false;
       break;
-    case 39:
-      keys.right = false;
-      break;
-
     case 16:
       keys.shift = false;
       break;
@@ -584,12 +569,12 @@ function render()
     // DRAW MIRROR FRAME WITH MIRROR
     drawMirrorFrame(objProgram, modelViewMatrix, projectionMatrix);
 
-    // DRAW ROCKET
-    drawRocket(objProgram, modelViewMatrix_obj, projectionMatrix, false, false);
-
     // DRAW GROUND
     drawGround(groundProgram, modelViewMatrix, projectionMatrix,
                modelViewMatrixLight, projectionMatrixLight, false);
+
+    // DRAW ROCKET
+    drawRocket(objProgram, modelViewMatrix_obj, projectionMatrix, false, false);
 
     // DRAW SHADOWS
     gl.bindFramebuffer(gl.FRAMEBUFFER, shadowProgram.fbo);
