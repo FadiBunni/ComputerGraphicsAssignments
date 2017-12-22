@@ -5,6 +5,7 @@ var numTimesToSubdivide = 3;
 var index = 0;
 var pointsArray = [];
 var normalsArray=[];
+var rendered = false;
 
 var va = vec4(0.0, 0.0, 1.0, 1);
 var vb = vec4(0.0, 0.942809, -0.333333, 1);
@@ -100,7 +101,6 @@ var init = function(){
     materialDiffuse = vec4(diffS*1.0, diffS*1.0, diffS*1.0, diffS*0.0 );
     materialSpecular = vec4(specS*1.0, specS*1.0, specS*1.0, specS*0.0 );
 
-
     var ambientProduct = mult(light, materialAmbient);
     var diffuseProduct = mult(light, materialDiffuse);
     var specularProduct = mult(light, materialSpecular);
@@ -125,37 +125,30 @@ var init = function(){
 
     document.getElementById("Button1").onclick = function(){
         numTimesToSubdivide++;
-        index = 0;
         init();
     };
     document.getElementById("Button2").onclick = function(){
         if(numTimesToSubdivide) numTimesToSubdivide--;
-        index = 0;
         init();
     };
     document.getElementById("ambSlide").oninput = function() {
         ambS = event.srcElement.value;
-        index = 0;
         init();
     };
     document.getElementById("diffSlide").oninput = function() {
         diffS = event.srcElement.value;
-        index = 0;
         init();
     };
     document.getElementById("specSlide").oninput = function() {
         specS = event.srcElement.value;
-        index = 0;
         init();
     };
     document.getElementById("lightSlide").oninput = function() {
         lightS = event.srcElement.value;
-        index = 0;
         init();
     };
     document.getElementById("shinSlide").oninput = function() {
         materialShininess = event.srcElement.value;
-        index = 0;
         init();
     };
 
@@ -174,7 +167,8 @@ var init = function(){
     gl.uniform1f( gl.getUniformLocation(program,
        "shininess"),materialShininess );
 
-    render();
+    if(!rendered) render();
+    rendered = true;
 }
 
 function render()

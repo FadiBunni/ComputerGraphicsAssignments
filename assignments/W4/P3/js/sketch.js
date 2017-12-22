@@ -131,7 +131,8 @@ var init = function(){
     gl.uniform4fv( gl.getUniformLocation(program,
        "lightPosition"),flatten(lightPosition) );
 
-    render();
+    if(!rendered) render();
+    rendered = true;
 }
 
 function render(){

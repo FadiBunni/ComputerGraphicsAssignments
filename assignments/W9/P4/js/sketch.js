@@ -105,7 +105,7 @@ var init = function(){
       objMotion = (!objMotion) ? true : false;
     };
     document.getElementById("lightMotion").onclick = function(){
-        lightMotion = (!lightMotion) ? true : false;
+      lightMotion = (!lightMotion) ? true : false;
     };
 
     readOBJFile('assignments/W9/teapot.obj', 1/4, true);
@@ -236,7 +236,6 @@ function initFramebufferObject() {
   gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer);
   gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, texture, 0);
   gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.RENDERBUFFER, depthBuffer);
-
 
   framebuffer.texture = texture;
 

@@ -191,10 +191,8 @@ function render(){
     gl.uniformMatrix4fv(modelViewMatrixLoc, false, flatten(modelViewMatrix));
     gl.drawArrays(gl.TRIANGLE_STRIP,4,4);
     gl.drawArrays(gl.TRIANGLE_STRIP,8,4);
-    
-<<<<<<< HEAD
+
     if(!interrupted) requestAnimFrame(render);
-=======
 }
 
 init();

@@ -130,32 +130,26 @@ var init = function(){
     };
     document.getElementById("Button2").onclick = function(){
         if(numTimesToSubdivide) numTimesToSubdivide--;
-        index = 0;
         init();
     };
     document.getElementById("ambSlide").oninput = function() {
         ambS = event.srcElement.value;
-        index = 0;
         init();
     };
     document.getElementById("diffSlide").oninput = function() {
         diffS = event.srcElement.value;
-        index = 0;
         init();
     };
     document.getElementById("specSlide").oninput = function() {
         specS = event.srcElement.value;
-        index = 0;
         init();
     };
     document.getElementById("lightSlide").oninput = function() {
         lightS = event.srcElement.value;
-        index = 0;
         init();
     };
     document.getElementById("shinSlide").oninput = function() {
         materialShininess = event.srcElement.value;
-        index = 0;
         init();
     };
 
@@ -174,7 +168,8 @@ var init = function(){
     gl.uniform1f( gl.getUniformLocation(program,
        "shininess"),materialShininess );
 
-    render();
+    if(!rendered) render();
+    rendered = true;
 }
 
 function render(){
