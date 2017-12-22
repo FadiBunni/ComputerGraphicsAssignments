@@ -1,1 +1,1 @@
-This part is fairly straightforward. We just insert the ground from previously and apply the ground transparency in the same way as we did with the shadows.
+This part is fairly straightforward. We just insert the ground from previously and apply the ground transparency in the same way as we did with the shadows. Again, we need to be aware of the ordering of the drawing.

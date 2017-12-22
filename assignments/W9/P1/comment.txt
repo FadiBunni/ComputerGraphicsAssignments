@@ -3,7 +3,7 @@ In this part, we have made a function to create the reflection matrix as stated 
 <br/>
 However, when we do this, we sadly get some very strange, and meaningless results, so we felt we had to tweak the values of "p" and "v" for the reflection to look decent.
 <br/>
-When drawing the reflection, we make create its model view matrix by multiplying the original one with the reflection matrix, and then applying the object translation afterwards. Perhaps the ordering of these transformations could be altered to fix the reflection.
+When drawing the reflection, we create its model view matrix by multiplying the original one with the reflection matrix, and then applying the object translation afterwards. Perhaps the ordering of these transformations could be altered to fix the reflection.
 <br/>
 <br/>
 In order to draw the shaders correctly for the reflection, we create a new uniform variable called "modelViewMatrixShading", which contains the model view matrix for the original teapot. This is done so that the reflection and the original teapot will be shaded from the same matrix.
