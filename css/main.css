@@ -99,6 +99,11 @@ td.hljs-ln-code {
  	text-align:  left !important;
 }
 
+#rocket_project_zip {
+	text-align: center !important;
+	margin-top: 20px;
+}
+
 #no_app_assignments {
 	float:  right;
 }

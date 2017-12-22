@@ -1,3 +1,4 @@
+//Fragment shader obj
 precision mediump float;
 uniform vec4 ambientProduct;
 uniform vec4 diffuseProduct;

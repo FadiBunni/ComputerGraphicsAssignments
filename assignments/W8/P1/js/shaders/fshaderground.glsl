@@ -1,3 +1,4 @@
+//Fragment shader ground
 precision mediump float;
 uniform sampler2D sampler;
 varying vec2 fTexCoord;

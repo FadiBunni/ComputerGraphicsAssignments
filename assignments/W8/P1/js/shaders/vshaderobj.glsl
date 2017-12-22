@@ -1,3 +1,4 @@
+//Vertex shader obj
 precision mediump float;
 attribute vec4 a_Position;
 attribute vec4 a_Normal;

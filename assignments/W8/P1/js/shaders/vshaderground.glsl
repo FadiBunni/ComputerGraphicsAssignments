@@ -1,3 +1,4 @@
+//Vertex shader ground
 attribute vec4 a_Position;
 attribute vec2 a_TexCoord;
 uniform mat4 modelViewMatrix;
