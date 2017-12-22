@@ -14,6 +14,7 @@ varying vec4 vNormal;
 void main()
 {
     vec4 fColor;
+    // Transform to camera coordinates
     vec3 light = (modelViewMatrix *lightPosition).xyz;
     vec3 L = lightPosition.w == 0.0 ? normalize(light) : normalize(light - pos);
 

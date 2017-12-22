@@ -1,0 +1,4 @@
+We now need a total of 3 shaders. One for the ground, one for the teapot, and one for the shadows. We do as previously where we create empty buffers before the rendering and initialize the shader pointers.
+<br/>
+<br/>
+The difference in this program from the previous one is that we now handle the shadows as a visibility problem, instead of just flat out redraw the teapot. For this we set up a new frame buffer object instance, so we can render to textures instead. Since its a question of visibility, we also need to go into light space by setting the eye of the camera to the light coords. This is used to calculate what is obstructed by the light, and thus should be shadowed.

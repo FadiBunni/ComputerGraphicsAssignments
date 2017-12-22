@@ -1,0 +1,6 @@
+We create the different shader programs by changing the ID of the shaders in the html-file, and then creating a new program instance in the js script file. We then initialize the pointer to all the shader variables, and create empty buffers.
+<br/>
+<br/>
+When drawing the 3 different objects in the scene, we need to be aware of the ordering of them again. Like previously, it here makes sense to draw the ground, followed by the shadows, and then lastly the teapot, with respect to the depth test. Before we draw the shadows however, we need to make the necessary teapot translations.
+<br/>
+We have chosen to implement an extra button for debugging purposes, which simply alters the model view matrix such that the camera is placed directly above the teapot. This helped us in drawing the objects in the right order.

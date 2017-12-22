@@ -1,4 +1,3 @@
-//The window.onload event is executed in misc.js file. no need to run it twice.
 var canvas;
 var gl;
 var groundProgram, objProgram, shadowProgram;
@@ -27,11 +26,8 @@ var near = 1;
 var far = 10;
 var fov = 45;
 var aspect;
-var eye;
-var at = vec3(0.0, 0.0, 0.0);
-var up = vec3(0.0, 1.0, 0.0);
 
-var lightPosition = vec4(0, 2, 0, 0);
+var lightPosition = vec4(0, 4, 0, 0);
 var thetaLight = 0.0;
 
 var objMotion = true;
@@ -54,8 +50,8 @@ var OFFSCREEN_WIDTH = 2048, OFFSCREEN_HEIGHT = 2048;
 
 var init = function(){
     canvas = document.getElementById( "gl_canvas" );
-        canvas.width = 512;
-        canvas.height = 512;
+    canvas.width = 512;
+    canvas.height = 512;
     gl = WebGLUtils.setupWebGL( canvas );
     if ( !gl ) alert( "WebGL isn't available" );
 
@@ -107,9 +103,6 @@ var init = function(){
 
     readOBJFile('assignments/W8/teapot.obj', 1/4, true);
 
-    gl.activeTexture(gl.TEXTURE0);
-    gl.bindTexture(gl.TEXTURE_2D, shadowProgram.fbo.texture);
-
     document.getElementById("objMotion").onclick = function(){
         if(!objMotion) objMotion = true;
         else objMotion = false;
@@ -153,8 +146,6 @@ function initTextures(program) {
     }
     gl.useProgram(program);
     gl.uniform1i(program.textureMap, 0);
-
-    gl.bindTexture(gl.TEXTURE_2D, null);
   };
   image.src = "assignments/W8/xamp23.png";
   return texture;
@@ -207,29 +198,31 @@ function render(){
     lightPosition[0] = 4*Math.sin(thetaLight);
     lightPosition[2] = -2 + 4*Math.cos(thetaLight);
 
-    eye = vec3(0,2,-6);
+    // SET UP MATRICES
+    var eye = vec3(0,2,-6);
+    var at = vec3(0.0, 0.0, 0.0);
+    var up = vec3(0.0, 1.0, 0.0);
+
     modelViewMatrix = lookAt(eye, at , up);
     projectionMatrix = perspective(fov, aspect, near, far);
-    projectionMatrixLight = perspective(120.0, OFFSCREEN_WIDTH/OFFSCREEN_HEIGHT, 1.0, 100.0);
-    var eye = vec3(lightPosition[0], lightPosition[1], lightPosition[2]);
+    projectionMatrixLight = perspective(75.0, OFFSCREEN_WIDTH/OFFSCREEN_HEIGHT, 1, 100.0);
+    eye = vec3(lightPosition[0], lightPosition[1], lightPosition[2]);
     modelViewMatrixLight = lookAt(eye, at, up);
 
     var obj_translate = translate(0, Math.sin(thetaTranslate) * 0.2 - 0.5, 0);
-
     var modelViewMatrix_obj = mult(modelViewMatrix, obj_translate);
-
     var modelViewMatrixLight_obj = mult(modelViewMatrixLight, obj_translate);
-
     normalM = normalMatrix(modelViewMatrix_obj, true);
+
     thetaTranslate += objMotion ? 0.05 : 0.0;
+
+    // DRAW SHADOWS
     gl.bindFramebuffer(gl.FRAMEBUFFER, shadowProgram.fbo);
     gl.viewport(0, 0, OFFSCREEN_WIDTH, OFFSCREEN_HEIGHT);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
     gl.useProgram(shadowProgram);
-    gl.activeTexture(gl.TEXTURE0);
-    gl.bindTexture(gl.TEXTURE_2D, shadowProgram.fbo.texture);
-    // DRAW GROUND SHADOW
+    // DRAW GROUND FOR SHADOW
     drawGround(shadowProgram, groundObject, texture, modelViewMatrixLight,
                projectionMatrixLight, null, null, true);
     // DRAW TEAPOT SHADOW
@@ -310,7 +303,7 @@ function initArrayBufferForLaterUse(data, num, type) {
 }
 
 function initElementArrayBufferForLaterUse(data, type) {
-  var buffer = gl.createBuffer();　  // Create a buffer object
+  var buffer = gl.createBuffer();
   gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, buffer);
   gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, data, gl.STATIC_DRAW);
 
@@ -337,7 +330,6 @@ function initFramebufferObject() {
   gl.bindFramebuffer(gl.FRAMEBUFFER, framebuffer);
   gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, texture, 0);
   gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.RENDERBUFFER, depthBuffer);
-
 
   framebuffer.texture = texture;
 

@@ -1,0 +1,4 @@
+Projection shadows are defined by simply copying the object and flattening it onto a plane. This brings a lot of problems - first off, the shadows are very difficult to handle when the surface is not a flat area. Shadowing an object with interpolated colors become hard as well. There is also no self-shadowing. It is usually easy to compute.
+<br/>
+<br/>
+Shadow mapping is another approach where shadowing becomes a visibility problem instead, where the light source coordinates together with the depth buffer are used to determine what is in shadows and what is not.  Since the shadow map is limited by the depth buffer resolution, it often has aliasing problems. However, it works with multiple light sources, are easier to make work on surfaces that are not flat and naturally supports self-shadowing.

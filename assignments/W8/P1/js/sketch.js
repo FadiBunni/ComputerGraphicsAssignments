@@ -1,4 +1,3 @@
-//The window.onload event is executed in misc.js file. no need to run it twice.
 var canvas;
 var gl;
 var groundProgram;
@@ -26,12 +25,6 @@ var near = 3;
 var far = 11;
 var fov = 45;
 var aspect;
-var radius = 3.0;
-var theta  = 0.0;
-var phi    = 0.0;
-var eye;
-var at = vec3(0.0, 0.0, 0.0);
-var up = vec3(0.0, 1.0, 0.0);
 
 var lightPosition = vec4(0.0,7.0,-3.0, 0.0);
 var thetaLight = 0.0;
@@ -62,8 +55,8 @@ var phiIncr = 0;
 
 var init = function(){
     canvas = document.getElementById( "gl_canvas" );
-        canvas.width = 512;
-        canvas.height = 512;
+    canvas.width = 512;
+    canvas.height = 512;
     gl = WebGLUtils.setupWebGL( canvas );
     if ( !gl ) alert( "WebGL isn't available" );
 
@@ -114,6 +107,10 @@ var init = function(){
         if(!lightMotion) lightMotion = true;
         else lightMotion = false;
     };
+    document.getElementById("debug").onclick = function(){
+        if(!debugging) debugging = true;
+        else debugging = false;
+    };
 
     waitToRender();
 }
@@ -146,11 +143,8 @@ function initTextures(gl, program) {
        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
     }
-    // Pass the texure unit 0 to u_Sampler
     gl.useProgram(program);
     gl.uniform1i(program.sampler, 0);
-
-    gl.bindTexture(gl.TEXTURE_2D, null);
   };
   image.src = "assignments/W8/xamp23.png";
   return texture;
@@ -198,7 +192,9 @@ function onReadOBJFile(fileString, fileName, gl, scale, reverse) {
 
 function render(){
     gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-    eye = vec3(radius*Math.sin(phi), radius*Math.sin(theta), radius*Math.cos(phi));
+    var eye = vec3(0, 3, -9);
+    var at = vec3(0, -1, 0);
+    var up = vec3(0, 1, 0);
     modelViewMatrix = lookAt(eye, at , up);
     projectionMatrix = perspective(fov, aspect, near, far);
 
@@ -206,7 +202,6 @@ function render(){
       eye = vec3(0, 5, -3);
       modelViewMatrix = lookAt(eye, vec3(0.0, -1.0, -3.0) , vec3(0.0, 0.0, -1.0));
     }
-
     // DRAW GROUND
     drawGround(gl, groundProgram, groundObject, texture, modelViewMatrix);
     // DRAW TEAPOT
@@ -217,42 +212,24 @@ function render(){
 
 function drawObj(gl, program, o, modelViewMatrix) {
     gl.useProgram(program);
+    initAttributeVariable(gl, program.a_Position, o.vertexBuffer);
+    initAttributeVariable(gl, program.a_Normal, o.normalBuffer);
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, o.indexBuffer);
 
     // ROTATE LIGHT SOURCE
     if(lightMotion) thetaLight += 0.01;
     if(thetaLight > 2*Math.PI) {thetaLight -= 2*Math.PI;}
     lightPosition[0] = 2*Math.sin(thetaLight);
     lightPosition[2] = -2 + 2*Math.cos(thetaLight);
+    //lightPosition[1] =7.0 + Math.sin(rot);
 
-    initAttributeVariable(gl, program.a_Position, o.vertexBuffer);
-    initAttributeVariable(gl, program.a_Normal, o.normalBuffer);
+    // Translate teapot to center of quad
+    modelViewMatrix = mult(modelViewMatrix, translate(vec3(0, -1, -3)));
 
-    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, o.indexBuffer);
-
-    var t1 = translate(vec3(0, -1, -3), mat4());
-    modelViewMatrix = mult(modelViewMatrix, t1);
-
-    // Translation up and down
+    // Translate teapot up and down
     if(objMotion) rot+=0.02;
     if(rot >= Math.PI) rot-=Math.PI
-    var trans = Math.sin(rot);
-    var t2 = translate(vec3(0,trans,0),mat4());
-    modelViewMatrix = mult(modelViewMatrix, t2);
-
-    gl.depthFunc(gl.LESS);
-
-    gl.uniformMatrix4fv(program.projectionMatrix, false, flatten(projectionMatrix));
-    gl.uniformMatrix4fv(program.modelViewMatrix, false, flatten(modelViewMatrix));
-    var normalM = normalMatrix(modelViewMatrix, true)
-    gl.uniformMatrix3fv(program.normalMatrix, false, flatten(normalM));
-
-    gl.uniform4fv(program.ambientProduct, flatten(ambientProduct));
-    gl.uniform4fv(program.diffuseProduct, flatten(diffuseProduct));
-    gl.uniform4fv(program.specularProduct, flatten(specularProduct));
-    gl.uniform4fv(program.lightPosition, flatten(lightPosition));
-    gl.uniform1f(program.shininess, shininess);
-
-    gl.drawElements(gl.TRIANGLES, o.numIndices, o.indexBuffer.type, 0);
+    modelViewMatrix = mult(modelViewMatrix, translate(vec3(0,Math.sin(rot),0)));
 
     // SHADOWS
     gl.depthFunc(gl.GEQUAL);
@@ -266,23 +243,33 @@ function drawObj(gl, program, o, modelViewMatrix) {
     gl.uniform4fv(program.diffuseProduct, flatten(vec4(0,0,0,0)));
     gl.uniform4fv(program.specularProduct, flatten(vec4(0,0,0,0)));
     gl.drawElements(gl.TRIANGLES, o.numIndices, o.indexBuffer.type, 0);
+    gl.depthFunc(gl.LESS);
+
+    // Draw Teapot
+    gl.uniformMatrix4fv(program.projectionMatrix, false, flatten(projectionMatrix));
+    gl.uniformMatrix4fv(program.modelViewMatrix, false, flatten(modelViewMatrix));
+    var normalM = normalMatrix(modelViewMatrix, true);
+    gl.uniformMatrix3fv(program.normalMatrix, false, flatten(normalM));
+
+    gl.uniform4fv(program.ambientProduct, flatten(ambientProduct));
+    gl.uniform4fv(program.diffuseProduct, flatten(diffuseProduct));
+    gl.uniform4fv(program.specularProduct, flatten(specularProduct));
+    gl.uniform4fv(program.lightPosition, flatten(lightPosition));
+    gl.uniform1f(program.shininess, shininess);
+
+    gl.drawElements(gl.TRIANGLES, o.numIndices, o.indexBuffer.type, 0);
 
 }
 
 function drawGround(gl, program, o, texture, modelViewMatrix) {
     gl.useProgram(program);
-    gl.depthFunc(gl.LESS);
     initAttributeVariable(gl, program.a_Position, o.vertexBuffer);
     initAttributeVariable(gl, program.a_TexCoord, o.texCoordBuffer);
-
-    gl.activeTexture(gl.TEXTURE0);
-    gl.bindTexture(gl.TEXTURE_2D, texture);
 
     gl.uniformMatrix4fv(program.projectionMatrix, false, flatten(projectionMatrix));
     gl.uniformMatrix4fv(program.modelViewMatrix, false, flatten(modelViewMatrix));
 
     gl.drawArrays(gl.TRIANGLE_STRIP,0,4);
-
 }
 
 function initAttributeVariable(gl, a_attribute, buffer) {

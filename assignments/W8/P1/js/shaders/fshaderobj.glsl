@@ -8,6 +8,7 @@ uniform mat3 normalMatrix;
 uniform float shininess;
 varying vec3 pos;
 varying vec4 fNormal;
+
 void main() {
 	vec4 fColor;
 	vec3 light = (lightPosition).xyz;

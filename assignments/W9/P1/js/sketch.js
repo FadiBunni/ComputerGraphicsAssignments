@@ -1,4 +1,3 @@
-//The window.onload event is executed in misc.js file. no need to run it twice.
 var canvas;
 var gl;
 var groundProgram, objProgram, shadowProgram;
@@ -267,18 +266,6 @@ function mirrorMatrix(p, v) {
     return m;
 }
 
-function modifyProjectionMatrix(clipplane, projection) {
-
-  var oblique = mult(mat4(), projection);
-  var q = vec4((Math.sign(clipplane[0]) + projection[0][2])/projection[0][0],
-  (Math.sign(clipplane[1]) + projection[1][2])/projection[1][1],-1.0,
-  (1.0 + projection[2][2])/projection[2][3]);
-  var s = 2.0/dot(clipplane, q);
-  oblique[2] = vec4(clipplane[0]*s, clipplane[1]*s,
-  clipplane[2]*s + 1.0, clipplane[3]*s);
-  return oblique;
-}
-
 function render(){
     /* ROTATE LIGHT SOURCE AND OBJECT ----------------------------- */
     if(lightMotion) lightTranslate += 0.01;
@@ -324,27 +311,6 @@ function render(){
     // DRAW REFLECTION
     gl.useProgram(objProgram);
     drawObj(objProgram, modelViewMatrixMirror, projectionMatrix, false);
-
-    // DRAW GROUND
-    //gl.useProgram(groundProgram);
-    //drawGround(groundProgram, modelViewMatrix, projectionMatrix,
-    //           modelViewMatrixLight, projectionMatrixLight, false);
-
-    // DRAW SHADOWS HERE
-    gl.bindFramebuffer(gl.FRAMEBUFFER, shadowProgram.fbo);
-    gl.viewport(0, 0, OFFSCREEN_WIDTH, OFFSCREEN_HEIGHT);
-    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-
-    gl.useProgram(shadowProgram);
-    gl.activeTexture(gl.TEXTURE0);
-    gl.bindTexture(gl.TEXTURE_2D, shadowProgram.fbo.texture);
-
-    // DRAW GROUND SHADOW
-    drawGround(shadowProgram, modelViewMatrixLight,
-               projectionMatrixLight, null, null, true);
-    // DRAW TEAPOT SHADOW
-    drawObj(shadowProgram, modelViewMatrixLight_obj, projectionMatrixLight, true);
-    if(!interrupted) requestAnimFrame(render);
 }
 
 function drawObj(program, mvm, pm, drawShadow) {

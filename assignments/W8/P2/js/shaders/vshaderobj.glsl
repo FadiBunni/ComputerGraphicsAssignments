@@ -6,6 +6,7 @@ uniform mat4 projectionMatrix;
 
 varying vec3 pos;
 varying vec4 fNormal;
+
 void main() {
   fNormal = a_Normal;
   pos = (modelViewMatrix * a_Position).xyz;

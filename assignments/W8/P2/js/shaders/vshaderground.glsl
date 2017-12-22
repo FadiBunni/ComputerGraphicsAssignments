@@ -11,6 +11,5 @@ varying vec4 v_PositionFromLight;
 void main() {
   gl_Position = projectionMatrix * modelViewMatrix * a_Position;
   fTexCoord = a_TexCoord;
-
   v_PositionFromLight = projectionMatrixLight * modelViewMatrixLight * a_Position;
 }
