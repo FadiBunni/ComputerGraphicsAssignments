@@ -550,7 +550,7 @@ function render()
     gl.stencilMask(0x00);
     gl.clear(gl.DEPTH_BUFFER_BIT);
 
-    // DRAW GROUND REFLECTION ONLY IF STENCIL TEST PASSES
+    // DRAW GROUND REFLECTION IF STENCIL TEST PASSES
     gl.stencilFunc(gl.LEQUAL, 1, 0xFF);
     drawGround(groundProgram, modelViewMatrixMirror, projectionMatrix,
                modelViewMatrixLight, projectionMatrixLight, false);
